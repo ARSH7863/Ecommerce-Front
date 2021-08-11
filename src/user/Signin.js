@@ -38,30 +38,40 @@ const Signin = () => {
   };
 
   const signInForm = () => (
-    <form>
-      <div className="form-group">
-        <label className="text-muted">Email</label>
-        <input
-          onChange={handleChange("email")}
-          type="email"
-          className="form-control"
-          value={email}
-        />
-      </div>
+    <div className="row p-2">
+      <div className="col-sm-12 ml-4">
+        <form>
+          <div className="form-group">
+            <label className="text-muted">Email</label>
+            <input
+              onChange={handleChange("email")}
+              type="email"
+              className="form-control"
+              value={email}
+            />
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Password</label>
-        <input
-          onChange={handleChange("password")}
-          type="password"
-          className="form-control"
-          value={password}
-        />
+          <div className="form-group">
+            <label className="text-muted">Password</label>
+            <input
+              onChange={handleChange("password")}
+              type="password"
+              className="form-control"
+              value={password}
+            />
+          </div>
+          <div className="row">
+            <div className="col-5"></div>
+            <div className="col-5">
+              <button onClick={clickSubmit} className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+            <div className="col-2"></div>
+          </div>
+        </form>
       </div>
-      <button onClick={clickSubmit} className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    </div>
   );
 
   const showError = () => (

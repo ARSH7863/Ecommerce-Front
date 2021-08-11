@@ -39,8 +39,8 @@ const Signup = () => {
   };
 
   const signUpForm = () => (
-    <div className="row p-5">
-      <div className="col-sm-12">
+    <div className="row p-2">
+      <div className="col-sm-12 ml-4">
         <form>
           <div className="form-group">
             <label className="text-muted">Name</label>

@@ -100,7 +100,7 @@ const Shop = () => {
   return (
     <Layout
       title="Shop Page"
-      descripton="Search & Find Books of your Choice."
+      descripton="Search & Find Products of your Choice."
       className="container-fluid"
     >
       <div className="row">

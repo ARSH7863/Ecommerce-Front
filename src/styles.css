@@ -23,7 +23,7 @@
  */
 
 .name {
-  background: indigo;
+  background: black;
   color: #fff;
   font-weight: bold;
 }
@@ -53,11 +53,12 @@
  */
 
 .product-img {
-  min-height: 100px;
+  min-height: 50px;
+  max-height: 300px;
 }
 
 .jumbotron h2 {
-  margin-top: -20px;
+  margin-top: -40px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -73,7 +74,8 @@
 .jumbotron {
   height: 180px;
   color: #fff;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+  background: #ff69b4;
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;

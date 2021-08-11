@@ -220,7 +220,7 @@ const UpdateProduct = ({ match }) => {
 
   return (
     <Layout
-      title="Add a new product"
+      title="Update Your Existing Product."
       descripton={`G'day ${user.name}, ready to update your product?`}
     >
       <div className="row">

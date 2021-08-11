@@ -11,7 +11,7 @@ const Layout = ({
   return (
     <div>
       <Menu />
-      <div className="jumbotron">
+      <div className="jumbotron text-center">
         <br />
         <h2>{title}</h2>
         <p className="lead"> {descripton} </p>

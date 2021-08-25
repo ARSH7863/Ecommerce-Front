@@ -3,8 +3,10 @@ import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
+import { Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
-const Card = ({
+const CardDetails = ({
   product,
   showViewProductButton = true,
   showAddToCartButton = true,
@@ -21,7 +23,7 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">
+          <button className="btn btn-outline-primary mt-2 mb-2 CardDetails-btn-1">
             View Product
           </button>
         </Link>
@@ -103,8 +105,8 @@ const Card = ({
     );
   };
   return (
-    <div className="card h-100">
-      <div className="card-header card-header-1 ">{product.name}</div>
+    <div>
+      {/* <div className="card-header card-header-1 ">{product.name}</div>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
@@ -126,9 +128,71 @@ const Card = ({
         {showRemoveButton(showRemoveProductButton)}
 
         {showCartUpdateOptions(cartUpdate)}
-      </div>
+      </div> */}
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top">{shouldRedirect(redirect)}</Card.Img>
+        <Card.Body>
+          <ShowImage item={product} url="product" />
+          <Card.Title className="text-center">{product.name}</Card.Title>
+          <Card.Text>
+            {shouldRedirect(redirect)}
+            <p className="card-p" className="text-center">
+              {product.description.substring(0, 100)}{" "}
+            </p>
+            <p className="card-p black-10">$ {product.price}</p>
+            <p className="black-9">
+              Category: {product.category && product.category.name}
+            </p>
+            <p className="black-8">
+              Added on {moment(product.createdAt).fromNow()}
+            </p>
+            {showStock(product.quantity)}
+            <br />
+          </Card.Text>
+
+          {showViewButton(showViewProductButton)}
+
+          {showAddToCartBtn(showAddToCartButton)}
+
+          {showRemoveButton(showRemoveProductButton)}
+
+          {showCartUpdateOptions(cartUpdate)}
+        </Card.Body>
+      </Card>
     </div>
   );
 };
 
-export default Card;
+/* <Card style={{ width: "18rem" }}>
+  <Card.Img variant="top">
+    <ShowImage item={product} url="product" />
+  </Card.Img>
+  <Card.Body>
+    <Card.Title>{product.name}</Card.Title>
+    <Card.Text>
+      {shouldRedirect(redirect)}
+      <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
+        <p className="card-p black-10">$ {product.price}</p>
+        <p className="black-9">
+          Category: {product.category && product.category.name}
+        </p>
+        <p className="black-8">
+          Added on {moment(product.createdAt).fromNow()}
+        </p>
+        {showStock(product.quantity)}
+        <br />
+    </Card.Text>
+    <Button variant="primary">
+      
+        {showViewButton(showViewProductButton)}
+
+        {showAddToCartBtn(showAddToCartButton)}
+
+        {showRemoveButton(showRemoveProductButton)}
+
+        {showCartUpdateOptions(cartUpdate)}
+    </Button>
+  </Card.Body>
+</Card>; */
+
+export default CardDetails;

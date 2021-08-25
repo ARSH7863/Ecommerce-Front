@@ -10,6 +10,7 @@
     "braintree-web": "^3.79.1",
     "braintree-web-drop-in-react": "^1.2.1",
     "cors": "^2.8.5",
+    "html-react-parser": "0.0.4",
     "moment": "^2.29.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",

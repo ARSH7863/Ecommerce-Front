@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
-import Card from "./Card";
+import CardDetails from "./CardDetails";
 
 const Search = () => {
   const [data, setData] = useState({
@@ -68,7 +68,7 @@ const Search = () => {
         <div className="row">
           {results.map((product, i) => (
             <div className="col-4 mb-3">
-              <Card key={i} product={product} />
+              <CardDetails key={i} product={product} />
             </div>
           ))}
         </div>

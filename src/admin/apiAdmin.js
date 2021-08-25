@@ -36,6 +36,7 @@ export const updateCategory = (categoryId, userId, token, category) => {
 };
 
 export const createProduct = (userId, token, product) => {
+  console.log(product.get("photo"));
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
     headers: {

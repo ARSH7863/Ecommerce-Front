@@ -6,7 +6,7 @@ import {
   createOrder,
 } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
-import Card from "./Card";
+import CardDetails from "./CardDetails";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 // import "braintree-web"; // not using this package

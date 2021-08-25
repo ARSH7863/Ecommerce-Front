@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import { Link, withRouter, ReactDOM } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Form } from "react-bootstrap";
 import logo from "../assets/img/Vl-logo-256.png";
 import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-// import Search from "./Search";
+import Search from "./Search";
 
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
@@ -100,16 +100,16 @@ const Menu = ({ history }) => {
 							</Nav.Link>
 						)}
 					</Nav>
-					{/* <Nav>
+					<Nav>
 						<Form>
-							<Form.Group
+							{/* <Form.Group
 								className="mb-2"
 								controlId="exampleForm.ControlInput1"
 							>
 								<Form.Control type="email" placeholder="name@example.com" />
-							</Form.Group>
+							</Form.Group> */}
 						</Form>
-					</Nav> */}
+					</Nav>
 					<Nav>
 						{!isAuthenticated() && (
 							<Fragment>

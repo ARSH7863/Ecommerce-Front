@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter, ReactDOM } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
-import { Navbar, Nav, Form } from "react-bootstrap";
+import { Navbar, Nav, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import logo from "../assets/img/Vl-logo-256.png";
 import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
@@ -119,11 +119,18 @@ const Menu = ({ history }) => {
 										style={isActive(history, "/signin")}
 										to="/signin"
 									>
-										<IoIosLogIn
-											fontSize="30px"
-											className="text-center"
-											color="white"
-										/>
+										<OverlayTrigger
+											overlay={<Tooltip id="tooltip-disabled">Sign in</Tooltip>}
+											placement="bottom"
+										>
+											<span className="d-inline-block">
+												<IoIosLogIn
+													fontSize="30px"
+													className="text-center"
+													color="white"
+												/>
+											</span>
+										</OverlayTrigger>
 									</Link>
 								</Nav.Link>
 								<Nav.Link>
@@ -132,11 +139,18 @@ const Menu = ({ history }) => {
 										style={isActive(history, "/signup")}
 										to="/signup"
 									>
-										<AiOutlineUserAdd
-											fontSize="30px"
-											className="text-center"
-											color="white"
-										/>
+										<OverlayTrigger
+											overlay={<Tooltip id="tooltip-disabled">Sign Up</Tooltip>}
+											placement="bottom"
+										>
+											<span className="d-inline-block">
+												<AiOutlineUserAdd
+													fontSize="30px"
+													className="text-center"
+													color="white"
+												/>
+											</span>
+										</OverlayTrigger>
 									</Link>
 								</Nav.Link>
 							</Fragment>
@@ -154,11 +168,18 @@ const Menu = ({ history }) => {
 											})
 										}
 									>
-										<IoIosLogOut
-											fontSize="30px"
-											className="text-center"
-											color="white"
-										/>
+										<OverlayTrigger
+											overlay={<Tooltip id="tooltip-disabled">Logout</Tooltip>}
+											placement="bottom"
+										>
+											<span className="d-inline-block">
+												<IoIosLogOut
+													fontSize="30px"
+													className="text-center"
+													color="white"
+												/>
+											</span>
+										</OverlayTrigger>
 									</span>
 								</li>
 							</div>

@@ -111,7 +111,7 @@ const Shop = () => {
 			</small>
 			<hr />
 			<div className="row">
-				<div className="col-4">
+				<div className="col-md-4 col-12">
 					<h4>Filter By Category</h4>
 					<ul>
 						<Checkbox
@@ -127,11 +127,11 @@ const Shop = () => {
 						/>
 					</div>
 				</div>
-				<div className="col-8">
+				<div className="col-md-8 col-12">
 					<h2 className="mb-4">Products</h2>
 					<div className="row">
 						{filteredResults.map((product, i) => (
-							<div key={i} className="col-4 mb-3">
+							<div key={i} className="col-md-4 col-12 mb-3">
 								<CardDetails product={product} />
 							</div>
 						))}

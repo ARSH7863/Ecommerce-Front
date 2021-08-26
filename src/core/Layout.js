@@ -1,9 +1,9 @@
 import React from "react";
 import Menu from "./Menu";
 import Carousel from "react-bootstrap/Carousel";
-import carsouselPhoto1 from "../assets/img/Brand-image-flute-2-3.jpg";
-import carsouselPhoto2 from "../assets/img/nepsis-3.jpeg";
-import carsouselPhoto3 from "../assets/img/vasmol-3.jpg";
+import carsouselPhoto1 from "../assets/img/Carousel/Brand-image-flute-2-3.jpg";
+import carsouselPhoto2 from "../assets/img/Carousel/nepsis-3.jpeg";
+import carsouselPhoto3 from "../assets/img/Carousel/vasmol-3.jpg";
 import "../styles.css";
 const Layout = ({
 	title = "Title",
@@ -19,7 +19,7 @@ const Layout = ({
         <h2>{title}</h2>
         <p className="lead"> {descripton} </p>
       </div> */}
-			<div style={{ display: "block", paddingTop: 30, paddingBottom: 30 }}>
+			<div className="pb-3">
 				<Carousel fade>
 					<Carousel.Item interval={1500}>
 						<img
@@ -34,7 +34,7 @@ const Layout = ({
 					</Carousel.Item>
 					<Carousel.Item interval={1500}>
 						<img
-							className="d-block w-100"
+							className="w-50 d-block w-100"
 							src={carsouselPhoto2}
 							alt="Second slide"
 						/>

@@ -3,7 +3,7 @@ import { Link, withRouter, ReactDOM } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 import { Navbar, Nav, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import logo from "../assets/img/Vl-logo-256.png";
+import logo from "../assets/img/Logo/logo-2.jpg";
 import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
@@ -32,7 +32,7 @@ const Menu = ({ history }) => {
 				className="py-0"
 			>
 				<Navbar.Brand>
-					<img src={logo} height="30px" style={{ marginBottom: "8px" }} />
+					<img src={logo} height="45px" style={{ marginBottom: "4px" }} />
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
@@ -64,14 +64,16 @@ const Menu = ({ history }) => {
 										color="white"
 									/>
 									&nbsp; Cart
-									<sup>
-										<span
-											className="badge badge-pill"
-											style={{ background: "#C5C640" }}
-										>
-											{itemTotal()}
-										</span>
-									</sup>
+									{itemTotal() !== 0 ? (
+										<sup>
+											<span
+												className="badge badge-pill"
+												style={{ background: "#FF6161" }}
+											>
+												{itemTotal()}
+											</span>
+										</sup>
+									) : null}
 								</h6>
 							</Link>
 						</Nav.Link>

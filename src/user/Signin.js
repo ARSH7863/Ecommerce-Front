@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
+import Menu from "../core/Menu";
 
 const Signin = () => {
 	const [values, setValues] = useState({
@@ -104,16 +104,14 @@ const Signin = () => {
 	};
 
 	return (
-		<Layout
-			title="Signin"
-			descripton={`Please SignIn to Continue.`}
-			className="container col-md-8 offset-md-2"
-		>
+		<>
+			<Menu />
+
 			{showLoading()}
 			{showError()}
 			{signInForm()}
 			{redirectUser()}
-		</Layout>
+		</>
 	);
 };
 

@@ -129,7 +129,7 @@ const CardDetails = ({
 
         {showCartUpdateOptions(cartUpdate)}
       </div> */}
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem", height: "100%" }}>
         <Card.Img variant="top">{shouldRedirect(redirect)}</Card.Img>
         <Card.Body>
           <ShowImage item={product} url="product" />

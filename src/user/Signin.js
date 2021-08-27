@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth";
 import Menu from "../core/Menu";
+import "../user/Signin.css";
+import { FiSend } from "react-icons/fi";
 
 const Signin = () => {
 	const [values, setValues] = useState({
@@ -38,40 +40,52 @@ const Signin = () => {
 	};
 
 	const signInForm = () => (
-		<div className="row p-2">
-			<div className="col-sm-12 ml-4">
-				<form>
-					<div className="form-group">
-						<label className="text-muted">Email</label>
-						<input
-							onChange={handleChange("email")}
-							type="email"
-							className="form-control"
-							value={email}
-						/>
-					</div>
+		<>
+			<div class="row justify-content-center ">
+				<div class="box shadow p-4">
+					<h4 className="text-center pt-3">Login</h4>
 
-					<div className="form-group">
-						<label className="text-muted">Password</label>
-						<input
-							onChange={handleChange("password")}
-							type="password"
-							className="form-control"
-							value={password}
-						/>
+					<div className="col-sm-12 ml-2 mr-5">
+						<form>
+							<div className="form-group pt-2">
+								<label className="text-muted">Email</label>
+								<input
+									onChange={handleChange("email")}
+									type="email"
+									className="form-control"
+									value={email}
+								/>
+							</div>
+
+							<div className="form-group pt-2">
+								<label className="text-muted">Password</label>
+								<input
+									onChange={handleChange("password")}
+									type="password"
+									className="form-control"
+									value={password}
+								/>
+							</div>
+
+							<div className="text-center pt-2">
+								<button
+									onClick={clickSubmit}
+									className="btn  btn-outline-primary"
+								>
+									Submit <FiSend />
+								</button>
+							</div>
+							<div className="text-center pl-5 pt-4">
+								Don't Have an Account?{" "}
+								<Link to="/signup" style={{ textDecoration: "none" }}>
+									Sign Up
+								</Link>
+							</div>
+						</form>
 					</div>
-					<div className="row">
-						<div className="col-5"></div>
-						<div className="col-5">
-							<button onClick={clickSubmit} className="btn btn-primary">
-								Submit
-							</button>
-						</div>
-						<div className="col-2"></div>
-					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 
 	const showError = () => (

@@ -8,7 +8,6 @@ import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-import Search from "./Search";
 
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {

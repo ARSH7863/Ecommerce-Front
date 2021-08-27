@@ -77,7 +77,7 @@ const CardDetails = ({
 	const showCartUpdateOptions = (cartUpdate) => {
 		return (
 			cartUpdate && (
-				<div>
+				<div className="h-75">
 					<div className="input-group mb-3">
 						<div className="input-group-prepend">
 							<span className="input-group-text">Adjust Quantity</span>

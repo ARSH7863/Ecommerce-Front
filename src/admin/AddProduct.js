@@ -197,7 +197,7 @@ const AddProduct = () => {
 			<div className="row">
 				<div className="col-md-8 offset-md-2">
 					<h5 className="pl-0 pt-3">
-						Good DAY {user.name} , Ready to Add A New Product?
+						Good Day {user.name} , Ready to Add A New Product?
 					</h5>
 					<hr />
 					{showLoading()}

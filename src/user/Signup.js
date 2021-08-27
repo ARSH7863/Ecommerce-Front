@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Layout from "../core/Layout";
 import { signup } from "../auth";
 import Menu from "../core/Menu";
 import { FiSend } from "react-icons/fi";
 
-const Signup = () => {
+const Signup = ({ history }) => {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -35,6 +34,12 @@ const Signup = () => {
           password: "",
           error: "",
           success: true,
+        });
+        history.push({
+          pathname: "/signin",
+          state: {
+            message: "Account Created Successfully. Please Login to continue.",
+          },
         });
       }
     });

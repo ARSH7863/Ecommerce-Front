@@ -136,12 +136,12 @@ const Signup = () => {
                   Submit <FiSend />
                 </button>
               </div>
-              {/* <div className="text-center pl-5 pt-4">
-                Don't Have an Account?{" "}
-                <Link to="/signup" style={{ textDecoration: "none" }}>
-                  Sign Up
+              <div className="text-center pl-5 pt-4">
+                Already Have an Account?{" "}
+                <Link to="/signin" style={{ textDecoration: "none" }}>
+                  Sign In
                 </Link>
-              </div> */}
+              </div>
             </form>
           </div>
         </div>

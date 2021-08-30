@@ -28,7 +28,7 @@ const Menu = ({ history }) => {
         expand="md"
         style={{ backgroundColor: "#2874F0" }}
         variant="dark"
-        className="py-0 fixed-top"
+        className="py-0 "
       >
         <Navbar.Brand>
           <img src={logo} height="30px" style={{ marginBottom: "4px" }} />

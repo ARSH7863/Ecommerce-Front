@@ -5,7 +5,7 @@ import Menu from "../core/Menu";
 import "../assets/css/Signin.css";
 import { FiSend } from "react-icons/fi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { BiErrorAlt } from "react-icons/bi";
+import { BiErrorCircle } from "react-icons/bi";
 
 const Signin = ({ location }) => {
 	const [values, setValues] = useState({
@@ -34,6 +34,8 @@ const Signin = ({ location }) => {
 	const clickSubmit = (event) => {
 		// console.log(name,email,password);
 		event.preventDefault();
+
+		setMessage("");
 		setValues({ ...values, error: false, loading: true });
 		signin({ email, password }).then((data) => {
 			if (data.error) {
@@ -65,10 +67,7 @@ const Signin = ({ location }) => {
 								{showError()}
 								{message && (
 									<div className="alert alert-info">
-										<p>
-											{" "}
-											<BsFillInfoCircleFill /> &nbsp; {message}
-										</p>
+										<BsFillInfoCircleFill /> &nbsp; {message}
 									</div>
 								)}
 								<div className="form-group pt-2">
@@ -118,8 +117,7 @@ const Signin = ({ location }) => {
 			className="alert alert-danger"
 			style={{ display: error ? "" : "none" }}
 		>
-			<BiErrorAlt /> &nbsp;
-			{error}
+			<BiErrorCircle fontSize="20px" /> &nbsp; {error}
 		</div>
 	);
 

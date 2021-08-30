@@ -6,14 +6,15 @@ import { FiSend } from "react-icons/fi";
 
 const Signup = ({ history }) => {
   const [values, setValues] = useState({
-    name: "abc",
-    email: "abc@gmail.com",
-    password: "abc7863",
+    name: "",
+    email: "",
+    password: "",
     error: "",
+    loading: false,
     success: false,
   });
 
-  const { name, email, password, success, error } = values;
+  const { name, email, password, loading, success, error } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -22,12 +23,15 @@ const Signup = ({ history }) => {
   const clickSubmit = (event) => {
     console.log(name, email, password);
     event.preventDefault();
-    setValues({ ...values, error: false });
+    setValues({ ...values, error: false, loading: true });
     signup({ name, email, password }).then((data) => {
-      console.log(data);
       if (data.error) {
-        console.log("error");
-        setValues({ ...values, error: data.error, success: false });
+        setValues({
+          ...values,
+          error: data.error,
+          loading: false,
+          success: false,
+        });
       } else {
         setValues({
           ...values,
@@ -40,7 +44,7 @@ const Signup = ({ history }) => {
         history.push({
           pathname: "/signin",
           state: {
-            message: "Account Created Successfully. Please Login.",
+            message: "Account Created Successfully.",
           },
         });
       }
@@ -99,60 +103,66 @@ const Signup = ({ history }) => {
     // 	</div>
     // </div>
     <>
-      <div class="row justify-content-center">
-        <div class="box shadow p-4">
-          <h4 className="text-center pt-3">SignUp</h4>
+      {loading ? (
+        <>
+          <div className="loader">Loading...</div>
+        </>
+      ) : (
+        <div class="row justify-content-center">
+          <div class="box shadow p-4">
+            <h4 className="text-center pt-3">SignUp</h4>
+            {showError()}
+            <div className="col-sm-12 ml-2 mr-5">
+              <form>
+                <div className="form-group pt-2">
+                  <label className="text-muted">Name</label>
+                  <input
+                    onChange={handleChange("name")}
+                    type="text"
+                    className="form-control"
+                    value={name}
+                  />
+                </div>
 
-          <div className="col-sm-12 ml-2 mr-5">
-            <form>
-              <div className="form-group pt-2">
-                <label className="text-muted">Name</label>
-                <input
-                  onChange={handleChange("name")}
-                  type="text"
-                  className="form-control"
-                  value={name}
-                />
-              </div>
+                <div className="form-group pt-2">
+                  <label className="text-muted">Email</label>
+                  <input
+                    onChange={handleChange("email")}
+                    type="email"
+                    className="form-control"
+                    value={email}
+                  />
+                </div>
 
-              <div className="form-group pt-2">
-                <label className="text-muted">Email</label>
-                <input
-                  onChange={handleChange("email")}
-                  type="email"
-                  className="form-control"
-                  value={email}
-                />
-              </div>
+                <div className="form-group pt-2">
+                  <label className="text-muted">Password</label>
+                  <input
+                    onChange={handleChange("password")}
+                    type="password"
+                    className="form-control"
+                    value={password}
+                  />
+                </div>
 
-              <div className="form-group pt-2">
-                <label className="text-muted">Password</label>
-                <input
-                  onChange={handleChange("password")}
-                  type="password"
-                  className="form-control"
-                  value={password}
-                />
-              </div>
-
-              <div className="text-center pt-2">
-                <button
-                  onClick={clickSubmit}
-                  className="btn  btn-outline-primary"
-                >
-                  Submit <FiSend />
-                </button>
-              </div>
-              <div className="text-center pl-5 pt-4">
-                Already Have an Account?{" "}
-                <Link to="/signin" style={{ textDecoration: "none" }}>
-                  Sign In
-                </Link>
-              </div>
-            </form>
+                <div className="text-center pt-2">
+                  <button
+                    onClick={clickSubmit}
+                    className="btn  btn-outline-primary"
+                  >
+                    Submit <FiSend />
+                  </button>
+                </div>
+                <div className="text-center pl-5 pt-4">
+                  Already Have an Account?{" "}
+                  <Link to="/signin" style={{ textDecoration: "none" }}>
+                    Sign In
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 
@@ -162,15 +172,6 @@ const Signup = ({ history }) => {
       style={{ display: error ? "" : "none" }}
     >
       {error}
-    </div>
-  );
-
-  const showSuccess = () => (
-    <div
-      className="alert alert-info"
-      style={{ display: success ? "" : "none" }}
-    >
-      New account is created. Please <Link to="/signin">Signin</Link>
     </div>
   );
 
@@ -185,8 +186,7 @@ const Signup = ({ history }) => {
       {/* <br />
       <h5 className="pl-1 pt-3">Please SignUp or Register</h5>
       <hr /> */}
-      {showSuccess()}
-      {showError()}
+
       {signUpForm()}
     </>
     // </Layout>

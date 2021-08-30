@@ -82,3 +82,14 @@
 		height: 5em;
 	}
 }
+.pwd-container {
+	position: relative;
+}
+
+.pwd-container img {
+	cursor: pointer;
+	position: absolute;
+	width: 22px;
+	right: 20px;
+	top: 48px;
+}

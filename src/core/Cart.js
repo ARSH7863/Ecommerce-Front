@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "./cartHelpers";
 import CardDetails from "./CardDetails";
-import Checkout from "./Checkout";
 import Menu from "./Menu";
 
-const Cart = () => {
+const Cart = ({ history }) => {
 	const [items, setItems] = useState([]);
 	const [run, setRun] = useState(false);
 
@@ -35,9 +34,24 @@ const Cart = () => {
 
 	const noItemsMessage = () => (
 		<h2>
-			Your cart is empty. <br /> <Link to="/shop">Continue shopping</Link>
+			Your cart is empty. <br />{" "}
+			<Link to="/shop">
+				<button style={{ background: "#2874F0" }} className="btn text-white">
+					continue Shopping
+				</button>
+			</Link>
 		</h2>
 	);
+
+	const checkout = () => {
+		history.push({
+			pathname: "/checkout",
+			state: {
+				items: items,
+				run: run,
+			},
+		});
+	};
 
 	// ;
 	return (
@@ -61,10 +75,15 @@ const Cart = () => {
 				</div>
 
 				<div className="col-6">
-					<h2 className="mb-4">Your cart summary</h2>
-					<hr />
-					{/* <Checkout products={items} /> */}
-					<Checkout products={items} setRun={setRun} run={run} />
+					{items.length > 0 ? (
+						<button
+							style={{ background: "#FB641B" }}
+							className="btn btn-lg text-white"
+							onClick={checkout}
+						>
+							Place Order
+						</button>
+					) : null}
 				</div>
 			</div>
 		</>

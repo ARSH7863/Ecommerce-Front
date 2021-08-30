@@ -16,32 +16,34 @@ import Orders from "./admin/Orders";
 import Profile from "./user/Profile";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
+import PlaceOrder from "./core/PlaceOrder";
 
 const Routes = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/shop" exact component={Shop} />
-        <Route path="/signup" exact component={Signup} />
-        <Route path="/signin" exact component={Signin} />
-        <Route path="/product/:productId" exact component={Product} />
-        <Route path="/cart" exact component={Cart} />
-        <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
-        <PrivateRoute path="/profile/:userId" exact component={Profile} />
-        <PrivateRoute path="/admin/products" exact component={ManageProducts} />
-        <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
-        <AdminRoute path="/create/category" exact component={AddCategory} />
-        <AdminRoute path="/create/product" exact component={AddProduct} />
-        <AdminRoute path="/admin/orders" exact component={Orders} />
-        <AdminRoute
-          path="/admin/product/update/:productId"
-          exact
-          component={UpdateProduct}
-        />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path="/" exact component={Home} />
+				<Route path="/shop" exact component={Shop} />
+				<Route path="/signup" exact component={Signup} />
+				<Route path="/signin" exact component={Signin} />
+				<Route path="/product/:productId" exact component={Product} />
+				<Route path="/cart" exact component={Cart} />
+				<Route path="/checkout" exact component={PlaceOrder} />
+				<PrivateRoute path="/user/dashboard" exact component={Dashboard} />
+				<PrivateRoute path="/profile/:userId" exact component={Profile} />
+				<PrivateRoute path="/admin/products" exact component={ManageProducts} />
+				<AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
+				<AdminRoute path="/create/category" exact component={AddCategory} />
+				<AdminRoute path="/create/product" exact component={AddProduct} />
+				<AdminRoute path="/admin/orders" exact component={Orders} />
+				<AdminRoute
+					path="/admin/product/update/:productId"
+					exact
+					component={UpdateProduct}
+				/>
+			</Switch>
+		</BrowserRouter>
+	);
 };
 
 export default Routes;

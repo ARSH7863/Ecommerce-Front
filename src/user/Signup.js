@@ -139,7 +139,7 @@ const Signup = ({ history }) => {
 									/>
 								</div>
 
-								<div className="form-group pt-2 pwd-container">
+								<div className="form-group pt-2">
 									<label className="text-muted">Password</label>
 									<input
 										required

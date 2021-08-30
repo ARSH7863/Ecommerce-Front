@@ -5,7 +5,7 @@ import Checkbox from "./Checkbox";
 import { prices } from "./fixedPrices";
 import RadioBox from "./Radiobox";
 import Menu from "./Menu";
-import "./shop.css";
+import "../assets/css/shop.css";
 
 const Shop = () => {
 	const [myFilters, setMyFilters] = useState({

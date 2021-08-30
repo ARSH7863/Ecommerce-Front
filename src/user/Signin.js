@@ -4,8 +4,8 @@ import { signin, authenticate, isAuthenticated } from "../auth";
 import Menu from "../core/Menu";
 import "../assets/css/Signin.css";
 import { FiSend } from "react-icons/fi";
-import { BsFillInfoCircleFill } from "react-icons/bs";
-import { BiErrorCircle } from "react-icons/bi";
+import showPwdImg from "../assets/img/Password/red-eye.png";
+import hidePwdImg from "../assets/img/Password/hide.png";
 
 const Signin = ({ location }) => {
 	const [values, setValues] = useState({
@@ -17,6 +17,7 @@ const Signin = ({ location }) => {
 	});
 
 	const [message, setMessage] = useState("");
+	const [isRevealPwd, setIsRevealPwd] = useState(false);
 
 	useEffect(() => {
 		if (location.state && location.state.message) {
@@ -66,13 +67,15 @@ const Signin = ({ location }) => {
 							<form>
 								{showError()}
 								{message && (
-									<div className="alert alert-info">
-										<BsFillInfoCircleFill /> &nbsp; {message}
+									<div className="alert alert-info text-center">
+										<img src="https://img.icons8.com/ios/24/000000/ok--v1.png" />
+										&nbsp; {message}
 									</div>
 								)}
 								<div className="form-group pt-2">
 									<label className="text-muted">Email</label>
 									<input
+										required
 										onChange={handleChange("email")}
 										type="email"
 										className="form-control"
@@ -80,18 +83,29 @@ const Signin = ({ location }) => {
 									/>
 								</div>
 
-								<div className="form-group pt-2">
+								<div className="form-group pt-2 pwd-container">
 									<label className="text-muted">Password</label>
 									<input
+										required
 										onChange={handleChange("password")}
-										type="password"
+										type={isRevealPwd ? "text" : "password"}
 										className="form-control"
 										value={password}
+									/>
+									<img
+										height="20px"
+										width="20px"
+										title={isRevealPwd ? "Hide password" : "Show password"}
+										src={isRevealPwd ? hidePwdImg : showPwdImg}
+										onClick={() => setIsRevealPwd((prevState) => !prevState)}
+										id="input_img"
+										alt="eyes"
 									/>
 								</div>
 
 								<div className="text-center pt-2">
 									<button
+										type="submit"
 										onClick={clickSubmit}
 										className="btn  btn-outline-primary"
 									>
@@ -114,10 +128,15 @@ const Signin = ({ location }) => {
 
 	const showError = () => (
 		<div
-			className="alert alert-danger"
+			className="alert alert-danger text-center"
 			style={{ display: error ? "" : "none" }}
 		>
-			<BiErrorCircle fontSize="20px" /> &nbsp; {error}
+			<img
+				src="https://img.icons8.com/office/23/000000/error.png"
+				className="mb-1"
+			/>
+			&nbsp;
+			{error}
 		</div>
 	);
 

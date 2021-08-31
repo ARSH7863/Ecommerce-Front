@@ -142,17 +142,19 @@ const CardDetails = ({
               <Link onClick={showProduct}>
                 <ShowImage item={product} url="product" />
               </Link>
-              <Link onClick={showProduct} style={{ textDecoration: "none" }}>
-                <Card.Title className="text-center">{product.name}</Card.Title>
+              <Link
+                className="productLink"
+                onClick={showProduct}
+                style={{ textDecoration: "none" }}
+              >
+                <Card.Title className="text-center ">{product.name}</Card.Title>
               </Link>
               <Card.Text>
                 {shouldRedirect(redirect)}
-                <p className="card-p" className="text-center">
+                {/* <p className="card-p" className="text-center">
                   {product.description.substring(0, 100)}{" "}
-                </p>
-                <p className="card-p" className="text-center">
-                  $ {product.price}
-                </p>
+                </p> */}
+                <h5 className="card-p pl-4">$ {product.price}</h5>
               </Card.Text>
 
               {showRemoveButton(showRemoveProductButton)}
@@ -162,7 +164,6 @@ const CardDetails = ({
           </div>
         </div>
       </div>
-      ;
     </div>
   );
 };

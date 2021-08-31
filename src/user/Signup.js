@@ -112,8 +112,8 @@ const Signup = ({ history }) => {
 					<Loader />
 				</>
 			) : (
-				<div class="row justify-content-center">
-					<div class="box shadow p-4">
+				<div class="row justify-content-center rowSignin">
+					<div class="box shadowSignin p-4">
 						<h4 className="text-center pt-3">SignUp</h4>
 						{showError()}
 						<div className="col-sm-12 ml-2 mr-5">

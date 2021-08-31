@@ -57,7 +57,7 @@ const Signin = ({ location }) => {
 		<>
 			{loading ? (
 				<>
-					<div className="loader">Loading...</div>
+					<Loader />
 				</>
 			) : (
 				<div class="row justify-content-center rowSignin">

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "./cartHelpers";
+import ShowImage from "./ShowImage";
 import CardDetails from "./CardDetails";
+import { removeItem } from "./cartHelpers";
+import cartPhoto from "../assets/img/cartItem.png";
 import Menu from "./Menu";
+import "../assets/css/Cart.css";
 
 const Cart = ({ history }) => {
 	const [items, setItems] = useState([]);
@@ -12,12 +16,27 @@ const Cart = ({ history }) => {
 		setItems(getCart());
 	}, [run]);
 
+	const showProduct = (product) => {
+		history.push(`/product/${product._id}`);
+	};
+
+	const showRemoveButton = (product) => {
+		return (
+			<h6
+				onClick={() => {
+					removeItem(product._id);
+					setRun(!run); // run useEffect in parent Cart
+				}}
+				className="removeProduct"
+			>
+				Remove
+			</h6>
+		);
+	};
 	const showItems = (items) => {
 		return (
-			<div>
-				<h2>Your cart has {`${items.length}`} items</h2>
-				<hr />
-				{items.map((product, i) => (
+			<div className="col-md-6 col-12">
+				{/* {items.map((product, i) => (
 					<CardDetails
 						key={i}
 						product={product}
@@ -27,20 +46,83 @@ const Cart = ({ history }) => {
 						setRun={setRun}
 						run={run}
 					/>
-				))}
+				))} */}
+				<div class="row justify-content-center rowCart pl-md-5">
+					<div class="box shadowCart p-4">
+						<h6>
+							My Cart({`${items.length}`}) <br />
+						</h6>
+						{items.map((product, i) => (
+							<>
+								<div className="row">
+									<div className="col-md-4 col-12">
+										<Link onClick={() => showProduct(product)}>
+											<ShowImage item={product} url="product" />
+										</Link>
+									</div>
+									<div className="col-md-8 col-12">
+										<Link
+											onClick={() => showProduct(product)}
+											className="cartlink"
+											style={{ textDecoration: "none" }}
+										>
+											<h5 className="font-weight-light">{product.name}</h5>
+										</Link>
+										{console.log(product)}
+										<p className="font-weight-light">
+											Category: {product.category && product.category.name}
+										</p>
+										<br />
+										<h5>${product.price}</h5>
+										{showRemoveButton(product)}
+									</div>
+								</div>
+								<hr />
+							</>
+						))}
+
+						{items.length > 0 ? (
+							<div className="text-center">
+								<button
+									style={{ background: "#FB641B" }}
+									className="btn text-white"
+									onClick={checkout}
+								>
+									Place Order
+								</button>
+							</div>
+						) : null}
+					</div>
+				</div>
 			</div>
 		);
 	};
 
 	const noItemsMessage = () => (
-		<h2>
-			Your cart is empty. <br />{" "}
-			<Link to="/shop">
-				<button style={{ background: "#2874F0" }} className="btn text-white">
-					continue Shopping
-				</button>
-			</Link>
-		</h2>
+		<div className="col-12">
+			<div class="row justify-content-center rowCart">
+				<div class="box shadowCart p-4">
+					<h6>
+						My Cart. <br />
+						<div className="text-center pt-5">
+							<img src={cartPhoto} className="cartImg" />
+						</div>
+						<br />
+						<h5 className="text-center">Missing Cart items?</h5>
+						<div className="text-center pt-4">
+							<Link to="/shop">
+								<button
+									style={{ background: "#2874F0" }}
+									className="btn text-white"
+								>
+									Continue Shopping
+								</button>
+							</Link>
+						</div>
+					</h6>
+				</div>
+			</div>
+		</div>
 	);
 
 	const checkout = () => {
@@ -64,27 +146,11 @@ const Cart = ({ history }) => {
 		// >
 		<>
 			<Menu />
-			<h5 className="pl-3 pt-3">
-				Manage your cart items. Add remove checkout or continue shopping.
-			</h5>
 
-			<hr />
 			<div className="row">
-				<div className="col-6">
-					{items.length > 0 ? showItems(items) : noItemsMessage()}
-				</div>
+				{items.length > 0 ? showItems(items) : noItemsMessage()}
 
-				<div className="col-6">
-					{items.length > 0 ? (
-						<button
-							style={{ background: "#FB641B" }}
-							className="btn btn-lg text-white"
-							onClick={checkout}
-						>
-							Place Order
-						</button>
-					) : null}
-				</div>
+				<div className="col-6"></div>
 			</div>
 		</>
 		// </Layout>

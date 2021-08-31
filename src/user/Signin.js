@@ -61,7 +61,7 @@ const Signin = ({ location }) => {
 				</>
 			) : (
 				<div class="row justify-content-center rowSignin">
-					<div class="box shadowSignin p-4">
+					<div class="Signinbox shadowSignin p-4">
 						<h4 className="text-center pt-3">Login</h4>
 
 						<div className="col-sm-12 ml-2 mr-5">

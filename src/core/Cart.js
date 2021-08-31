@@ -87,10 +87,10 @@ const Cart = ({ history }) => {
 						))}
 
 						{items.length > 0 ? (
-							<div className="text-center">
+							<div className="float-right">
 								<button
 									style={{ background: "#FB641B" }}
-									className="btn text-white"
+									className="btn text-white px-5 py-2"
 									onClick={checkout}
 								>
 									Place Order

@@ -113,7 +113,7 @@ const Signin = ({ location }) => {
 										Submit <FiSend />
 									</button>
 								</div>
-								<div className="text-center pl-5 pt-4">
+								<div className="text-center pl-md-5 pt-4">
 									Don't Have an Account?{" "}
 									<Link to="/signup" style={{ textDecoration: "none" }}>
 										Sign Up

@@ -169,10 +169,10 @@ const Signup = ({ history }) => {
 										Submit <FiSend />
 									</button>
 								</div>
-								<div className="text-center pl-5 pt-4">
+								<div className="text-center pl-md-5 pt-4">
 									Already Have an Account?{" "}
 									<Link to="/signin" style={{ textDecoration: "none" }}>
-										Sign In
+										Login
 									</Link>
 								</div>
 							</form>

@@ -6,6 +6,7 @@ import { prices } from "./fixedPrices";
 import RadioBox from "./Radiobox";
 import Menu from "./Menu";
 import "../assets/css/shop.css";
+import Loader from "../Loader/Loader.js";
 
 const Shop = () => {
 	const [myFilters, setMyFilters] = useState({
@@ -18,9 +19,11 @@ const Shop = () => {
 	const [skip, setSkip] = useState(0);
 	const [size, setSize] = useState(0);
 	const [filteredResults, setFilteredResults] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	// load categories and set form data
 	const init = () => {
+		setLoading(true);
 		getCategories().then((data) => {
 			if (data.error) {
 				setError(data.error);
@@ -28,6 +31,7 @@ const Shop = () => {
 				setCategories(data);
 			}
 		});
+		setLoading(false);
 	};
 
 	const loadFilteredResults = (newFilters) => {
@@ -47,13 +51,16 @@ const Shop = () => {
 	const loadMore = () => {
 		let toSkip = skip + limit;
 		// console.log(newFilters);
+		setLoading(true);
 		getFilteredProducts(toSkip, limit, myFilters.filters).then((data) => {
 			if (data.error) {
 				setError(data.error);
+				setLoading(false);
 			} else {
 				setFilteredResults([...filteredResults, ...data.data]);
 				setSize(data.size);
 				setSkip(toSkip);
+				setLoading(false);
 			}
 		});
 	};
@@ -70,11 +77,14 @@ const Shop = () => {
 	};
 
 	useEffect(() => {
+		setLoading(true);
 		init();
 		loadFilteredResults(skip, limit, myFilters.filters);
+		setLoading(false);
 	}, []);
 
 	const handleFilters = (filters, filterBy) => {
+		setLoading(true);
 		console.log("SHOP", filters, filterBy);
 		const newFilters = { ...myFilters };
 		newFilters.filters[filterBy] = filters;
@@ -85,6 +95,7 @@ const Shop = () => {
 		}
 		loadFilteredResults(myFilters.filters);
 		setMyFilters(newFilters);
+		setLoading(false);
 	};
 
 	const handlePrice = (value) => {
@@ -107,6 +118,7 @@ const Shop = () => {
 		// >
 		<>
 			<Menu />
+
 			<h5 className="pl-3 pt-3">Search & Find Products of your Choice.</h5>
 			<small className="pl-3">
 				Our most popular products based on sales. Updated hourly.
@@ -129,15 +141,22 @@ const Shop = () => {
 						/>
 					</div>
 				</div>
+
 				<div className="col-md-8 col-12">
 					<h2 className="mb-4">Products</h2>
-					<div className="row">
-						{filteredResults.map((product, i) => (
-							<div key={i} className="col-md-4 col-12 mb-3">
-								<CardDetails product={product} />
+					{loading ? (
+						<Loader />
+					) : (
+						<>
+							<div className="row">
+								{filteredResults.map((product, i) => (
+									<div key={i} className="col-md-4 col-12 mb-3">
+										<CardDetails product={product} />
+									</div>
+								))}
 							</div>
-						))}
-					</div>
+						</>
+					)}
 					<hr />
 					{loadMoreButton()}
 				</div>

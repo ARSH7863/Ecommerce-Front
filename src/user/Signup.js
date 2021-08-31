@@ -5,6 +5,7 @@ import Menu from "../core/Menu";
 import { FiSend } from "react-icons/fi";
 import showPwdImg from "../assets/img/Password/red-eye.png";
 import hidePwdImg from "../assets/img/Password/hide.png";
+import Loader from "../Loader/Loader";
 
 const Signup = ({ history }) => {
 	const [values, setValues] = useState({
@@ -108,7 +109,7 @@ const Signup = ({ history }) => {
 		<>
 			{loading ? (
 				<>
-					<div className="loader">Loading...</div>
+					<Loader />
 				</>
 			) : (
 				<div class="row justify-content-center">

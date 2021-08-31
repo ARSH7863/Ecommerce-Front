@@ -1,7 +1,7 @@
 import React from "react";
-import "./loading.css";
+import "./loader.css";
 
-export default function Loading() {
+export default function Loader() {
 	return (
 		<div>
 			<div className="loader">Loading...</div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth";
 import Menu from "../core/Menu";
+import Loader from "../Loader/Loader";
 import "../assets/css/Signin.css";
 import { FiSend } from "react-icons/fi";
 import showPwdImg from "../assets/img/Password/red-eye.png";
@@ -56,7 +57,7 @@ const Signin = ({ location }) => {
 		<>
 			{loading ? (
 				<>
-					<div className="loader">Loading...</div>
+					<Loader />
 				</>
 			) : (
 				<div class="row justify-content-center ">

@@ -8,7 +8,7 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import ShowImage from "./ShowImage";
 import { Col, Row, ListGroup } from "react-bootstrap";
-import Loading from "../Loading/Loading";
+import Loader from "../Loader/Loader";
 
 const Product = (props) => {
 	const [product, setProduct] = useState({});
@@ -94,7 +94,7 @@ const Product = (props) => {
 		<>
 			<Menu />
 			{loading ? (
-				<Loading />
+				<Loader />
 			) : (
 				<>
 					<Row className="mt-5">

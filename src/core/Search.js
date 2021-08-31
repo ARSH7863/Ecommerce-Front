@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
 import CardDetails from "./CardDetails";
+import Loader from "../Loader/Loader";
 
 const Search = () => {
 	const [data, setData] = useState({
@@ -10,6 +11,7 @@ const Search = () => {
 		results: [],
 		searched: false,
 	});
+	const [loading, setLoading] = useState(false);
 
 	const { categories, category, search, results, searched } = data;
 
@@ -29,13 +31,17 @@ const Search = () => {
 
 	const searchData = () => {
 		// console.log(search, category);
+
 		if (search) {
+			setLoading(true);
 			list({ search: search || undefined, category: category }).then(
 				(response) => {
 					if (response.error) {
 						console.log(response.error);
+						setLoading(false);
 					} else {
 						setData({ ...data, results: response, searched: true });
+						setLoading(false);
 					}
 				}
 			);
@@ -67,7 +73,7 @@ const Search = () => {
 
 				<div className="row">
 					{results.map((product, i) => (
-						<div className="col-4 mb-3">
+						<div className="col-3 mb-3">
 							<CardDetails key={i} product={product} />
 						</div>
 					))}
@@ -106,10 +112,22 @@ const Search = () => {
 	);
 
 	return (
-		<div className="row">
-			<div className="container mb-3">{searchForm()}</div>
-			<div className="container-fluid mb-3">{searchedProducts(results)}</div>
-		</div>
+		<>
+			{loading ? (
+				<>
+					<Loader />
+				</>
+			) : (
+				<>
+					<div className="row">
+						<div className="container mb-3">{searchForm()}</div>
+						<div className="container-fluid mb-3">
+							{searchedProducts(results)}
+						</div>
+					</div>
+				</>
+			)}
+		</>
 	);
 };
 

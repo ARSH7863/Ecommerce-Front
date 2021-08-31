@@ -3,29 +3,38 @@ import Layout from "./Layout";
 import { getProducts } from "./apiCore";
 import CardDetails from "./CardDetails";
 import Search from "./Search";
+import Loader from "../Loader/Loader";
 
 const Home = () => {
 	const [productsBySell, setProductsBySell] = useState([]);
 	const [productsByArrival, setProductsByArrival] = useState([]);
 	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [loading2, setLoading2] = useState(false);
 
 	const loadProductsBySell = () => {
+		setLoading(true);
 		getProducts("sold").then((data) => {
 			if (data.error) {
 				setError(data.error);
+				setLoading(false);
 			} else {
 				setProductsBySell(data);
+				setLoading(false);
 			}
 		});
 	};
 
 	const loadProductsByArrival = () => {
+		setLoading2(true);
 		getProducts("createdAt").then((data) => {
 			console.log(data);
 			if (data.error) {
 				setError(data.error);
+				setLoading2(false);
 			} else {
 				setProductsByArrival(data);
+				setLoading2(false);
 			}
 		});
 	};
@@ -43,26 +52,34 @@ const Home = () => {
 		>
 			<Search />
 			<h2 className="mb-4">New Arrivals</h2>
-			<div className="container-fluid">
-				<div className="row">
-					{productsByArrival.map((product, i) => (
-						<div key={i} className="col-md-3 col-12 mb-3">
-							<CardDetails product={product} />
-						</div>
-					))}
+			{loading2 ? (
+				<Loader />
+			) : (
+				<div className="container-fluid">
+					<div className="row">
+						{productsByArrival.map((product, i) => (
+							<div key={i} className="col-md-3 col-12 mb-3">
+								<CardDetails product={product} />
+							</div>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 
 			<h2 className="mb-4">Best Sellers</h2>
-			<div className="container-fluid">
-				<div className="row">
-					{productsBySell.map((product, i) => (
-						<div key={i} className="col-md-3 col-12 mb-3">
-							<CardDetails product={product} />
-						</div>
-					))}
+			{loading ? (
+				<Loader />
+			) : (
+				<div className="container-fluid">
+					<div className="row">
+						{productsBySell.map((product, i) => (
+							<div key={i} className="col-md-3 col-12 mb-3">
+								<CardDetails product={product} />
+							</div>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 		</Layout>
 	);
 };

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "./cartHelpers";
 import ShowImage from "./ShowImage";
-import CardDetails from "./CardDetails";
 import { removeItem } from "./cartHelpers";
 import cartPhoto from "../assets/img/cartItem.png";
 import Menu from "./Menu";
@@ -18,6 +17,12 @@ const Cart = ({ history }) => {
 
 	const showProduct = (product) => {
 		history.push(`/product/${product._id}`);
+	};
+
+	const getTotal = (products) => {
+		return products.reduce((currentValue, nextValue) => {
+			return currentValue + nextValue.count * nextValue.price;
+		}, 0);
 	};
 
 	const showRemoveButton = (product) => {
@@ -48,7 +53,7 @@ const Cart = ({ history }) => {
 					/>
 				))} */}
 				<div class="row justify-content-center rowCart pl-md-5">
-					<div class="box shadowCart p-4">
+					<div class="Cartbox shadowCart p-4">
 						<h6>
 							My Cart({`${items.length}`}) <br />
 						</h6>
@@ -101,7 +106,7 @@ const Cart = ({ history }) => {
 	const noItemsMessage = () => (
 		<div className="col-12">
 			<div class="row justify-content-center rowCart">
-				<div class="box shadowCart p-4">
+				<div class="Cartbox shadowCart p-4">
 					<h6>
 						My Cart. <br />
 						<div className="text-center pt-5">
@@ -120,6 +125,18 @@ const Cart = ({ history }) => {
 							</Link>
 						</div>
 					</h6>
+				</div>
+			</div>
+		</div>
+	);
+
+	const PriceRange = ({ items }) => (
+		<div className="col-md-6 col-12">
+			<div class="row justify-content-center rowCart pr-md-5">
+				<div class="Cartbox shadowCart p-4">
+					<h5 className="font-weight-light">PRICE DETAILS</h5>
+					<hr />
+					<p>Total Price: ${getTotal(items)}</p>
 				</div>
 			</div>
 		</div>
@@ -150,7 +167,7 @@ const Cart = ({ history }) => {
 			<div className="row">
 				{items.length > 0 ? showItems(items) : noItemsMessage()}
 
-				<div className="col-6"></div>
+				{items.length > 0 ? <PriceRange items={items} /> : null}
 			</div>
 		</>
 		// </Layout>

@@ -22,9 +22,13 @@
 .boxCard {
   border-radius: 0.3rem;
   width: 20rem;
-  height: 32rem;
+  height: 28rem;
 }
 
 .CardBody {
   max-height: 70%;
+}
+
+.productLink {
+  color: black;
 }

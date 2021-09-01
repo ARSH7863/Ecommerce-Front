@@ -128,7 +128,7 @@ const Cart = ({ history }) => {
 		<>
 			<Menu />
 
-			<div className="row">
+			<div className="row pt-5">
 				{items.length > 0 ? showItems(items) : noItemsMessage()}
 
 				{items.length > 0 ? <PriceRange items={items} /> : null}

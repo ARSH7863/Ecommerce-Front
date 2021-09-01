@@ -19,7 +19,7 @@ const Layout = ({
         <h2>{title}</h2>
         <p className="lead"> {descripton} </p>
       </div> */}
-			<div className="pb-3">
+			<div className="pt-5">
 				<Carousel fade>
 					<Carousel.Item interval={1500}>
 						<img

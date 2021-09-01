@@ -21,7 +21,7 @@ export default function PlaceOrder({ location }) {
 	return (
 		<div>
 			<Menu />
-			<div className="container">
+			<div className="container pt-5">
 				<h2 className="mb-4">Your cart summary</h2>
 				<hr />
 				{console.log(items)}

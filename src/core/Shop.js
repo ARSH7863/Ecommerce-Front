@@ -119,10 +119,10 @@ const Shop = () => {
 		//   descripton="Search & Find Products of your Choice."
 		//   className="container-fluid"
 		// >
-		<>
+		<div className="pt-5">
 			<Menu />
 
-			<h5 className="pl-3 pt-3">Search & Find Products of your Choice.</h5>
+			<h5 className="pl-3 pt-5">Search & Find Products of your Choice.</h5>
 			<small className="pl-3">
 				Our most popular products based on sales. Updated hourly.
 			</small>
@@ -164,7 +164,7 @@ const Shop = () => {
 					{loadMoreButton()}
 				</div>
 			</div>
-		</>
+		</div>
 		// </Layout>
 	);
 };

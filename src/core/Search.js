@@ -119,7 +119,7 @@ const Search = () => {
 				</>
 			) : (
 				<>
-					<div className="row">
+					<div className="row pt-5">
 						<div className="container mb-3">{searchForm()}</div>
 						<div className="container-fluid mb-3">
 							{searchedProducts(results)}

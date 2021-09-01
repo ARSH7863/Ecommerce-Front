@@ -5,29 +5,19 @@ import { removeItem } from "./cartHelpers";
 import cartPhoto from "../assets/img/cartItem.png";
 import Menu from "./Menu";
 import "../assets/css/Cart.css";
-import { MdDeleteForever } from "react-icons/md";
 import CartItems from "./CartItems";
 
 const Cart = ({ history }) => {
 	const [items, setItems] = useState([]);
 	const [run, setRun] = useState(false);
-	const [count, setCount] = useState(1);
-
-	const increNum = () => {
-		setCount(count + 1);
-	};
-	const decreaseNum = () => {
-		const decre = count - 1;
-		if (decre < 1) {
-			setCount(1);
-		} else {
-			setCount(decre);
-		}
-	};
 
 	useEffect(() => {
 		setItems(getCart());
 	}, [run]);
+
+	const handleRefresh = () => {
+		setRun((prevState) => !prevState);
+	};
 
 	const getTotal = (products) => {
 		return products.reduce((currentValue, nextValue) => {
@@ -44,12 +34,7 @@ const Cart = ({ history }) => {
 							My Cart({`${items.length}`}) <br />
 						</h6>
 						<hr />
-						<CartItems
-							items={items}
-							increNum={increNum}
-							decreaseNum={decreaseNum}
-							count={count}
-						/>
+						<CartItems items={items} handleRefresh={handleRefresh} />
 
 						{items.length > 0 ? (
 							<div className="float-right">
@@ -99,9 +84,23 @@ const Cart = ({ history }) => {
 		<div className="col-md-6 col-12">
 			<div class="row justify-content-center rowCart pr-md-5">
 				<div class="Cartbox shadowCart p-4">
-					<h5 className="font-weight-light">PRICE DETAILS</h5>
+					<h5 className="font-weight-light">
+						<b>PRICE DETAILS</b>
+					</h5>
 					<hr />
-					<p>Total Price: ${getTotal(items)}</p>
+					<p>
+						Price ({`${items.length}`} items):
+						<span style={{ paddingLeft: "120px" }}>${getTotal(items)}</span>
+					</p>
+					<p>
+						Delivery Charges:{" "}
+						<span style={{ paddingLeft: "95px", color: "green" }}>FREE</span>
+					</p>
+					<hr />
+					<h5>
+						Total Amount
+						<span style={{ paddingLeft: "95px" }}>${getTotal(items)}</span>
+					</h5>
 				</div>
 			</div>
 		</div>

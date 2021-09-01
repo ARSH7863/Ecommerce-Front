@@ -5,31 +5,31 @@ import ShowImage from "./ShowImage";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-import { removeItem } from "./cartHelpers";
+import { removeItem, updateItem } from "./cartHelpers";
 import { MdDeleteForever } from "react-icons/md";
 
-export default function CartItem({ product }) {
-	const [count, setCount] = useState(1);
-	const [run, setRun] = useState(false);
+export default function CartItem({ product, handleRefresh }) {
+	const [count, setCount] = useState(product.count);
 	const history = useHistory();
 
-	const increNum = () => {
-		setCount(count + 1);
+	const increNum = (product) => {
+		const incre = count + 1;
+		setCount(incre);
+		updateItem(product._id, incre);
+		handleRefresh();
 	};
-	const decreaseNum = () => {
+	const decreaseNum = (product) => {
 		const decre = count - 1;
-		if (decre < 1) {
-			setCount(1);
-		} else {
-			setCount(decre);
-		}
+		setCount(decre);
+		updateItem(product._id, decre);
+		handleRefresh();
 	};
 	const showRemoveButton = (product) => {
 		return (
 			<span
 				onClick={() => {
 					removeItem(product._id);
-					setRun(!run); // run useEffect in parent Cart
+					handleRefresh(); // run useEffect in parent Cart
 				}}
 				className="removeProduct px-5"
 			>
@@ -40,6 +40,7 @@ export default function CartItem({ product }) {
 	const showProduct = (product) => {
 		history.push(`/product/${product._id}`);
 	};
+
 	return (
 		<>
 			<div className="row">
@@ -47,26 +48,31 @@ export default function CartItem({ product }) {
 					<Link onClick={() => showProduct(product)}>
 						<ShowImage item={product} url="product" />
 					</Link>
-
+					{/* {showCartUpdateOptions()} */}
 					<div className="row">
 						<div className="col-md-4 col-3">
 							<button
-								className="btn"
+								className="btn btn-outline-info"
 								style={{ borderRadius: "50%" }}
-								onClick={decreaseNum}
+								onClick={() => decreaseNum(product)}
 								disabled={count == 1}
 							>
 								<AiOutlineMinus />
 							</button>
 						</div>
 						<div className="col-md-6 col-5">
-							<input className="form-control" type="text" value={count} />
+							<input
+								className="form-control"
+								type="number"
+								value={count}
+								disabled
+							/>
 						</div>
 						<div className="col-md-2 col-1 pl-md-1">
 							<button
-								className="btn"
+								className="btn btn-outline-info"
 								style={{ borderRadius: "50%" }}
-								onClick={increNum}
+								onClick={() => increNum(product)}
 							>
 								<AiOutlinePlus />
 							</button>
@@ -87,11 +93,13 @@ export default function CartItem({ product }) {
 					</p>
 					<br />
 					<h5>
-						${product.price} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						${product.price * product.count} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						&nbsp;
 						{showRemoveButton(product)}
 					</h5>
 				</div>
 			</div>
+
 			<hr />
 		</>
 	);

@@ -2,12 +2,12 @@ import React from "react";
 
 import CartItem from "./CartItem";
 
-export default function CartItems({ items, increNum, decreaseNum, count }) {
+export default function CartItems({ items, handleRefresh }) {
 	return (
 		<div>
 			{items.map((product, i) => (
 				<>
-					<CartItem product={product} />
+					<CartItem product={product} handleRefresh={handleRefresh} />
 				</>
 			))}
 		</div>

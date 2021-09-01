@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "./cartHelpers";
-import ShowImage from "./ShowImage";
 import { removeItem } from "./cartHelpers";
 import cartPhoto from "../assets/img/cartItem.png";
 import Menu from "./Menu";
 import "../assets/css/Cart.css";
+import { MdDeleteForever } from "react-icons/md";
+import CartItems from "./CartItems";
 
 const Cart = ({ history }) => {
 	const [items, setItems] = useState([]);
 	const [run, setRun] = useState(false);
+	const [count, setCount] = useState(1);
+
+	const increNum = () => {
+		setCount(count + 1);
+	};
+	const decreaseNum = () => {
+		const decre = count - 1;
+		if (decre < 1) {
+			setCount(1);
+		} else {
+			setCount(decre);
+		}
+	};
 
 	useEffect(() => {
 		setItems(getCart());
 	}, [run]);
-
-	const showProduct = (product) => {
-		history.push(`/product/${product._id}`);
-	};
 
 	const getTotal = (products) => {
 		return products.reduce((currentValue, nextValue) => {
@@ -25,66 +35,21 @@ const Cart = ({ history }) => {
 		}, 0);
 	};
 
-	const showRemoveButton = (product) => {
-		return (
-			<h6
-				onClick={() => {
-					removeItem(product._id);
-					setRun(!run); // run useEffect in parent Cart
-				}}
-				className="removeProduct"
-			>
-				Remove
-			</h6>
-		);
-	};
 	const showItems = (items) => {
 		return (
 			<div className="col-md-6 col-12">
-				{/* {items.map((product, i) => (
-					<CardDetails
-						key={i}
-						product={product}
-						showAddToCartButton={false}
-						cartUpdate={true}
-						showRemoveProductButton={true}
-						setRun={setRun}
-						run={run}
-					/>
-				))} */}
 				<div class="row justify-content-center rowCart pl-md-5">
 					<div class="Cartbox shadowCart p-4">
 						<h6>
 							My Cart({`${items.length}`}) <br />
 						</h6>
-						{items.map((product, i) => (
-							<>
-								<div className="row">
-									<div className="col-md-4 col-12">
-										<Link onClick={() => showProduct(product)}>
-											<ShowImage item={product} url="product" />
-										</Link>
-									</div>
-									<div className="col-md-8 col-12">
-										<Link
-											onClick={() => showProduct(product)}
-											className="cartlink"
-											style={{ textDecoration: "none" }}
-										>
-											<h5 className="font-weight-light">{product.name}</h5>
-										</Link>
-										{console.log(product)}
-										<p className="font-weight-light">
-											Category: {product.category && product.category.name}
-										</p>
-										<br />
-										<h5>${product.price}</h5>
-										{showRemoveButton(product)}
-									</div>
-								</div>
-								<hr />
-							</>
-						))}
+						<hr />
+						<CartItems
+							items={items}
+							increNum={increNum}
+							decreaseNum={decreaseNum}
+							count={count}
+						/>
 
 						{items.length > 0 ? (
 							<div className="float-right">

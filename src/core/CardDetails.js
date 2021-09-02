@@ -147,14 +147,16 @@ const CardDetails = ({
 								onClick={showProduct}
 								style={{ textDecoration: "none" }}
 							>
-								<Card.Title className="text-center ">{product.name}</Card.Title>
+								<h6 className="text-center">{product.name}</h6>
 							</Link>
 							<Card.Text>
 								{shouldRedirect(redirect)}
 								{/* <p className="card-p" className="text-center">
                   {product.description.substring(0, 100)}{" "}
                 </p> */}
-								<h5 className="card-p pl-4">$ {product.price}</h5>
+								<p className=" text-center font-weight-normal font-italic">
+									${product.price}
+								</p>
 							</Card.Text>
 
 							{showRemoveButton(showRemoveProductButton)}

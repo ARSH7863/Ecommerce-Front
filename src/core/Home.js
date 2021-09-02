@@ -48,7 +48,6 @@ const Home = () => {
 		<Layout
 			title="FullStack React Node MongoDB Ecommerce App"
 			descripton={`Node React Ecommerce App .`}
-			className="container-fluid"
 		>
 			<Search />
 			<h2 className="mb-4">New Arrivals</h2>

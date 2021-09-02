@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
 import CardDetails from "./CardDetails";
 import Loader from "../Loader/Loader";
+import "../assets/css/search.css";
 
 const Search = () => {
 	const [data, setData] = useState({
@@ -84,10 +85,11 @@ const Search = () => {
 
 	const searchForm = () => (
 		<form onSubmit={searchSubmit}>
-			<div className="row">
-				<div className="col-md-2 d-none d-sm-block">
+			<h6 className="text-center">Search Products Here!!!</h6>
+			{/* <div className="d-flex justify-content-center input-group">
+				<div className="ml-5 d-none d-sm-block">
 					<select
-						className="btn btn-outline-secondary"
+						className="btn btnSelect default"
 						onChange={handleChange("category")}
 					>
 						<option value="All">All</option>
@@ -98,20 +100,57 @@ const Search = () => {
 						))}
 					</select>
 				</div>
-				<div className="col-md-9 col-8">
+
+				<div className="ml-1">
 					<input
 						type="search"
 						className="form-control"
 						onChange={handleChange("search")}
 						placeholder="Search by name"
 					/>
-				</div>
-				<div className="col-md-1 col-3">
-					<div className="" style={{ border: "none" }}>
-						<button className="btn">Search</button>
+
+					<div class="input-group-append">
+						<span class="input-group-text">.00</span>
+					</div>
+				</div> */}
+			<div className="container">
+				<div class="input-group mb-3">
+					<select
+						className="btn btnSelect default"
+						onChange={handleChange("category")}
+					>
+						<option value="All">All</option>
+						{categories.map((c, i) => (
+							<option key={i} value={c._id}>
+								{c.name}
+							</option>
+						))}
+					</select>
+					<input
+						type="search"
+						className="form-control"
+						onChange={handleChange("search")}
+						placeholder="Search by name"
+					/>
+					<div class="input-group-append">
+						<span class="input-group-text bg-light">
+							<img src="https://img.icons8.com/color/24/000000/search--v3.png" />
+						</span>
 					</div>
 				</div>
 			</div>
+
+			{/* <div className="col-md-1 col-3 ">
+					<div style={{ border: "none" }}>
+						<button
+							className="btn px-3 py-1"
+							style={{ borderRadius: "58%", marginRight: "70px" }}
+						>
+							<img src="https://img.icons8.com/color/24/000000/search--v3.png" />
+						</button>
+					</div>
+				</div> */}
+			{/* </div> */}
 		</form>
 	);
 

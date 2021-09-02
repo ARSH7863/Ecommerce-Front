@@ -8,134 +8,134 @@ import "../assets/css/Cart.css";
 import CartItems from "./CartItems";
 
 const Cart = ({ history }) => {
-	const [items, setItems] = useState([]);
-	const [run, setRun] = useState(false);
+  const [items, setItems] = useState([]);
+  const [run, setRun] = useState(false);
 
-	useEffect(() => {
-		setItems(getCart());
-	}, [run]);
+  useEffect(() => {
+    setItems(getCart());
+  }, [run]);
 
-	const handleRefresh = () => {
-		setRun((prevState) => !prevState);
-	};
+  const handleRefresh = () => {
+    setRun((prevState) => !prevState);
+  };
 
-	const getTotal = (products) => {
-		return products.reduce((currentValue, nextValue) => {
-			return currentValue + nextValue.count * nextValue.price;
-		}, 0);
-	};
+  const getTotal = (products) => {
+    return products.reduce((currentValue, nextValue) => {
+      return currentValue + nextValue.count * nextValue.price;
+    }, 0);
+  };
 
-	const showItems = (items) => {
-		return (
-			<div className="col-md-6 col-12">
-				<div class="row justify-content-center rowCart pl-md-5">
-					<div class="Cartbox shadowCart p-4">
-						<h6>
-							My Cart({`${items.length}`}) <br />
-						</h6>
-						<hr />
-						<CartItems items={items} handleRefresh={handleRefresh} />
+  const showItems = (items) => {
+    return (
+      <div className="col-md-6 col-12">
+        <div class="row justify-content-center rowCart pl-md-5">
+          <div class="Cartbox shadowCart p-4">
+            <h6>
+              My Cart({`${items.length}`}) <br />
+            </h6>
+            <hr />
+            <CartItems items={items} handleRefresh={handleRefresh} />
 
-						{items.length > 0 ? (
-							<div className="float-right">
-								<button
-									style={{ background: "#FB641B" }}
-									className="btn text-white px-5 py-2"
-									onClick={checkout}
-								>
-									Place Order
-								</button>
-							</div>
-						) : null}
-					</div>
-				</div>
-			</div>
-		);
-	};
+            {items.length > 0 ? (
+              <div className="float-right">
+                <button
+                  style={{ background: "#FB641B" }}
+                  className="btn text-white px-5 py-2"
+                  onClick={checkout}
+                >
+                  Place Order
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-	const noItemsMessage = () => (
-		<div className="col-12">
-			<div class="row justify-content-center rowCart">
-				<div class="Cartbox shadowCart p-4">
-					<h6>
-						My Cart. <br />
-						<div className="text-center pt-5">
-							<img src={cartPhoto} className="cartImg" />
-						</div>
-						<br />
-						<h5 className="text-center">Missing Cart items?</h5>
-						<div className="text-center pt-4">
-							<Link to="/shop">
-								<button
-									style={{ background: "#2874F0" }}
-									className="btn text-white"
-								>
-									Continue Shopping
-								</button>
-							</Link>
-						</div>
-					</h6>
-				</div>
-			</div>
-		</div>
-	);
+  const noItemsMessage = () => (
+    <div className="col-12">
+      <div class="row justify-content-center rowCart">
+        <div class="Cartbox shadowCart p-4">
+          <h6>
+            My Cart. <br />
+            <div className="text-center pt-5">
+              <img src={cartPhoto} className="cartImg" />
+            </div>
+            <br />
+            <h5 className="text-center">Missing Cart items?</h5>
+            <div className="text-center pt-4">
+              <Link to="/shop">
+                <button
+                  style={{ background: "#2874F0" }}
+                  className="btn text-white"
+                >
+                  Continue Shopping
+                </button>
+              </Link>
+            </div>
+          </h6>
+        </div>
+      </div>
+    </div>
+  );
 
-	const PriceRange = ({ items }) => (
-		<div className="col-md-6 col-12">
-			<div class="row justify-content-center rowCart pr-md-5">
-				<div class="Cartbox shadowCart p-4">
-					<h5 className="font-weight-light">
-						<b>PRICE DETAILS</b>
-					</h5>
-					<hr />
-					<p>
-						Price ({`${items.length}`} items):
-						<span style={{ paddingLeft: "120px" }}>${getTotal(items)}</span>
-					</p>
-					<p>
-						Delivery Charges:{" "}
-						<span style={{ paddingLeft: "95px", color: "green" }}>FREE</span>
-					</p>
-					<hr />
-					<h5>
-						Total Amount
-						<span style={{ paddingLeft: "95px" }}>${getTotal(items)}</span>
-					</h5>
-				</div>
-			</div>
-		</div>
-	);
+  const PriceRange = ({ items }) => (
+    <div className="col-md-6 col-12">
+      <div class="row justify-content-center rowCart pr-md-5">
+        <div class="Cartbox shadowCart p-4">
+          <h5 className="font-weight-light">
+            <b>PRICE DETAILS</b>
+          </h5>
+          <hr />
+          <p>
+            Price ({`${items.length}`} items):
+            <span style={{ paddingLeft: "120px" }}>${getTotal(items)}</span>
+          </p>
+          <p>
+            Delivery Charges:{" "}
+            <span style={{ paddingLeft: "95px", color: "green" }}>FREE</span>
+          </p>
+          <hr />
+          <h5>
+            Total Amount
+            <span style={{ paddingLeft: "95px" }}>${getTotal(items)}</span>
+          </h5>
+        </div>
+      </div>
+    </div>
+  );
 
-	const checkout = () => {
-		history.push({
-			pathname: "/checkout",
-			state: {
-				items: items,
-				run: run,
-			},
-		});
-	};
+  const checkout = () => {
+    history.push({
+      pathname: "/checkout",
+      state: {
+        items: items,
+        run: run,
+      },
+    });
+  };
 
-	// ;
-	return (
-		// <Layout
-		//   title="Shopping Cart"
-		//   descripton={
-		//     "Manage your cart items. Add remove checkout or continue shopping."
-		//   }
-		//   className="container-fluid"
-		// >
-		<>
-			<Menu />
+  // ;
+  return (
+    // <Layout
+    //   title="Shopping Cart"
+    //   descripton={
+    //     "Manage your cart items. Add remove checkout or continue shopping."
+    //   }
+    //   className="container-fluid"
+    // >
+    <>
+      <Menu />
 
-			<div className="row pt-5">
-				{items.length > 0 ? showItems(items) : noItemsMessage()}
+      <div className="row pt-5">
+        {items.length > 0 ? showItems(items) : noItemsMessage()}
 
-				{items.length > 0 ? <PriceRange items={items} /> : null}
-			</div>
-		</>
-		// </Layout>
-	);
+        {items.length > 0 ? <PriceRange items={items} /> : null}
+      </div>
+    </>
+    // </Layout>
+  );
 };
 
 export default Cart;

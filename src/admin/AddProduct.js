@@ -14,12 +14,12 @@ const AddProduct = () => {
     shipping: "",
     quantity: "",
     photo: "",
+    expectedDeliveryDate: "",
     loading: false,
     error: "",
     createdProduct: "",
     redirectToProfile: false,
     formData: "",
-    expectedDeliveryDate: "",
   });
 
   const { user, token } = isAuthenticated();
@@ -31,12 +31,12 @@ const AddProduct = () => {
     category,
     shipping,
     quantity,
+    expectedDeliveryDate,
     loading,
     error,
     createdProduct,
     redirectToProfile,
     formData,
-    expectedDeliveryDate,
   } = values;
 
   // load categories and set form data
@@ -84,6 +84,7 @@ const AddProduct = () => {
           expectedDeliveryDate: "",
         });
       }
+      console.log(values);
     });
   };
 
@@ -154,7 +155,7 @@ const AddProduct = () => {
         <label className="text-muted">Expected Delivery Date</label>
         <input
           onChange={handleChange("expectedDeliveryDate")}
-          type="String"
+          type="number"
           className="form-control"
           value={expectedDeliveryDate}
         />

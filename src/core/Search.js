@@ -15,7 +15,6 @@ const Search = () => {
 	const [loading, setLoading] = useState(false);
 
 	const { categories, category, search, results, searched } = data;
-	console.log(category);
 
 	const loadCategories = () => {
 		getCategories().then((data) => {
@@ -78,7 +77,6 @@ const Search = () => {
 					<div className="row">
 						{results.map((product, i) => (
 							<div className="col-md-3 col-12">
-								{console.log(product)}
 								<CardDetails key={i} product={product} />
 							</div>
 						))}

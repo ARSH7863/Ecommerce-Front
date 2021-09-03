@@ -53,7 +53,7 @@ const Product = (props) => {
 		return (
 			<button
 				onClick={addToCart}
-				className="btn btn-warning mt-2 ml-3 mb-2 card-btn-1 px-5 py-2"
+				className="btn btn-warning ml-3 mb-2 text-white px-3 py-2"
 			>
 				<FaShoppingCart color="white" /> Add to cart
 			</button>
@@ -62,20 +62,17 @@ const Product = (props) => {
 
 	const showBuyNowBtn = () => {
 		return (
-			<button
-				onClick={addToCart}
-				className="btn btn-danger mt-2 ml-3 mb-2 card-btn-1 px-5 py-2"
-			>
-				<AiFillThunderbolt />
+			<button onClick={addToCart} className="btn btn-danger  mb-2 px-3 py-2">
+				<AiFillThunderbolt color="white" />
 				Buy Now
 			</button>
 		);
 	};
 	const showStock = (quantity) => {
 		return quantity > 0 ? (
-			<span className="badge badge-primary badge-pill">In Stock </span>
+			<span className="text-center text-success">IN STOCK</span>
 		) : (
-			<span className="badge badge-primary badge-pill">Out of Stock </span>
+			<span className="text-center text-danger">OUT OF STOCK</span>
 		);
 	};
 
@@ -100,26 +97,44 @@ const Product = (props) => {
 				<>
 					<div class="row justify-content-center rowProduct mt-5 pl-md-5">
 						<div class="Productbox shadowProduct p-4">
-							<Row className="mt-5 pt-5">
-								<Col md={7} lg={5} className="pb-5">
-									<ShowImage
-										item={product}
-										url="product"
-										height="300px"
-										width="300px"
-									/>
-									{showAddToCartBtn()}
-									{showBuyNowBtn()}
-								</Col>
-								<Col md={4} lg={3} className="mt-4 mx-2">
-									<h5>{product.name}</h5>
-									<hr />
+							<div className="container-fluid">
+								<div className="row">
+									<div className="col-md-1 col-12 mt-4"></div>
+									<div className="col-md-3 col-12 mb-5 mt-5 text-center">
+										<ShowImage
+											item={product}
+											url="product"
+											height="300px"
+											width="300px"
+										/>
+									</div>
+									<div className="col-md-1 col-12 mt-4"></div>
+									<div className="col-md-6 col-12 mt-4 ">
+										<h5>{product.name}</h5>
+										<hr />
 
-									<h6 className="text-muted">Description</h6>
-									<p>{product.description}</p>
-								</Col>
+										<h6 className="text-muted">Description</h6>
+										<p>{product.description}</p>
+										<h6>Price : ${product.price}</h6>
+										<h6>Status : {showStock(product.quantity)}</h6>
+									</div>
+								</div>
+								{shouldRedirect(redirect)}
+								<Row>
+									<span className="col-md-1"></span>
+									<span className="col-md-1 mr-md-4 col-6">
+										{showAddToCartBtn()}
+									</span>
+									<span className="col-md-2 ml-md-5 col-6">
+										{showBuyNowBtn()}
+									</span>
+								</Row>
+							</div>
+							{/* <Row className="mt-5">
+								<Col md={4} lg={5} className="mb-5 text-center"></Col>
+								<Col md={8} lg={3} className="mt-4 mx-2"></Col>
 
-								<Col md={11} lg={3} className="mx-auto">
+								{/* <Col md={11} lg={3} className="mx-auto">
 									<ListGroup className="text-break">
 										<ListGroup.Item>
 											<Row>
@@ -138,14 +153,14 @@ const Product = (props) => {
 										</ListGroup.Item>
 									</ListGroup>
 									{shouldRedirect(redirect)}
-								</Col>
-							</Row>
+								</Col> 
+							</Row> */}
 						</div>
-						<div className="container mt-5">
+						<div className="container-fluid mt-5">
 							<h4>Related products</h4>
 							<div className="row">
 								{relatedProduct.map((p, i) => (
-									<div className="col-md-4 col-12 " key={i}>
+									<div className="col-md-3 col-12 " key={i}>
 										<CardDetails product={p} />
 									</div>
 								))}

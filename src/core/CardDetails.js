@@ -159,8 +159,9 @@ const CardDetails = ({
 						<br />
 						<span className="font-weight-light">
 							{product.category && product.category.name}
+							<br />
 						</span>
-						<br />
+
 						<span className="font-weight-normal">${product.price}</span>
 						<br />
 						<span className="font-weight-light">

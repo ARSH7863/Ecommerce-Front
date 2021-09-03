@@ -50,7 +50,7 @@ const Home = () => {
 			descripton={`Node React Ecommerce App .`}
 		>
 			<Search />
-			<h2 className="mb-4">New Arrivals</h2>
+			<h5 className="mb-4 text-center">New Arrivals</h5>
 			{loading2 ? (
 				<Loader />
 			) : (
@@ -65,7 +65,7 @@ const Home = () => {
 				</div>
 			)}
 
-			<h2 className="mb-4">Best Sellers</h2>
+			<h5 className="mb-4 text-center">Best Sellers</h5>
 			{loading ? (
 				<Loader />
 			) : (

@@ -113,7 +113,6 @@ const Product = (props) => {
 								</Col>
 								<Col md={4} lg={3} className="mt-4 mx-2">
 									<h5>{product.name}</h5>
-									{console.log(product)}
 									<hr />
 
 									<h6 className="text-muted">Description</h6>

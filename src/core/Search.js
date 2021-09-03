@@ -15,6 +15,7 @@ const Search = () => {
 	const [loading, setLoading] = useState(false);
 
 	const { categories, category, search, results, searched } = data;
+	console.log(category);
 
 	const loadCategories = () => {
 		getCategories().then((data) => {
@@ -70,14 +71,18 @@ const Search = () => {
 	const searchedProducts = (results = []) => {
 		return (
 			<div>
-				<h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
-
-				<div className="row">
-					{results.map((product, i) => (
-						<div className="col-md-3 col-12 mb-3">
-							<CardDetails key={i} product={product} />
-						</div>
-					))}
+				<h5 className="mt-4 mb-4 text-center">
+					{searchMessage(searched, results)}
+				</h5>
+				<div className="container-fluid">
+					<div className="row">
+						{results.map((product, i) => (
+							<div className="col-md-3 col-12">
+								{console.log(product)}
+								<CardDetails key={i} product={product} />
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		);
@@ -85,7 +90,7 @@ const Search = () => {
 
 	const searchForm = () => (
 		<form onSubmit={searchSubmit}>
-			<h6 className="text-center">Search Products Here!!!</h6>
+			<h5 className="mb-4 text-center">Search Products Here!!!</h5>
 			{/* <div className="d-flex justify-content-center input-group">
 				<div className="ml-5 d-none d-sm-block">
 					<select
@@ -116,7 +121,7 @@ const Search = () => {
 			<div className="container">
 				<div class="input-group mb-3">
 					<select
-						className="btn btnSelect default"
+						className="btn btnSelect default  bg-light"
 						onChange={handleChange("category")}
 					>
 						<option value="All">All</option>
@@ -134,7 +139,13 @@ const Search = () => {
 					/>
 					<div class="input-group-append">
 						<span class="input-group-text bg-light">
-							<img src="https://img.icons8.com/color/24/000000/search--v3.png" />
+							{/* <img src="https://img.icons8.com/color/24/000000/search--v3.png" /> */}
+							<button
+								className="btn px-3 py-1 input-group-text bg-light"
+								style={{ borderRadius: "58%" }}
+							>
+								<img src="https://img.icons8.com/color/24/000000/search--v3.png" />
+							</button>
 						</span>
 					</div>
 				</div>
@@ -163,7 +174,7 @@ const Search = () => {
 			) : (
 				<>
 					<div className="row pt-5">
-						<div className="container-fluid mb-3 text-center">
+						<div className="container-fluid mb-3 ">
 							{searchForm()}
 
 							{searchedProducts(results)}

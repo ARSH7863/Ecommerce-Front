@@ -12,151 +12,152 @@ import Loader from "../Loader/Loader";
 import "../assets/css/Product.css";
 
 const Product = (props) => {
-  const [product, setProduct] = useState({});
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [redirect, setRedirect] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+	const [product, setProduct] = useState({});
+	const [relatedProduct, setRelatedProduct] = useState([]);
+	const [redirect, setRedirect] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
-  const loadSingleProduct = (productId) => {
-    setLoading(true);
-    read(productId).then((data) => {
-      if (data.error) {
-        setError(data.error);
-        setLoading(false);
-      } else {
-        setProduct(data);
-        // fetch related products
-        listRelated(data._id).then((data) => {
-          if (data.error) {
-            setError(data.error);
-            setLoading(false);
-          } else {
-            setRelatedProduct(data);
-            setLoading(false);
-          }
-        });
-      }
-    });
-  };
-  const addToCart = () => {
-    // console.log('added');
-    addItem(product, setRedirect(true));
-  };
+	const loadSingleProduct = (productId) => {
+		setLoading(true);
+		read(productId).then((data) => {
+			if (data.error) {
+				setError(data.error);
+				setLoading(false);
+			} else {
+				setProduct(data);
+				// fetch related products
+				listRelated(data._id).then((data) => {
+					if (data.error) {
+						setError(data.error);
+						setLoading(false);
+					} else {
+						setRelatedProduct(data);
+						setLoading(false);
+					}
+				});
+			}
+		});
+	};
+	const addToCart = () => {
+		// console.log('added');
+		addItem(product, setRedirect(true));
+	};
 
-  const shouldRedirect = (redirect) => {
-    if (redirect) {
-      return <Redirect to="/cart" />;
-    }
-  };
-  const showAddToCartBtn = () => {
-    return (
-      <button
-        onClick={addToCart}
-        className="btn btn-warning btn-lg mt-2 ml-3 mb-2 card-btn-1"
-      >
-        <FaShoppingCart color="white" /> Add to cart
-      </button>
-    );
-  };
+	const shouldRedirect = (redirect) => {
+		if (redirect) {
+			return <Redirect to="/cart" />;
+		}
+	};
+	const showAddToCartBtn = () => {
+		return (
+			<button
+				onClick={addToCart}
+				className="btn btn-warning mt-2 ml-3 mb-2 card-btn-1 px-5 py-2"
+			>
+				<FaShoppingCart color="white" /> Add to cart
+			</button>
+		);
+	};
 
-  const showBuyNowBtn = () => {
-    return (
-      <button
-        onClick={addToCart}
-        className="btn btn-danger btn-lg mt-2 ml-3 mb-2 card-btn-1"
-      >
-        <AiFillThunderbolt />
-        Buy Now
-      </button>
-    );
-  };
-  const showStock = (quantity) => {
-    return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock </span>
-    ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock </span>
-    );
-  };
+	const showBuyNowBtn = () => {
+		return (
+			<button
+				onClick={addToCart}
+				className="btn btn-danger mt-2 ml-3 mb-2 card-btn-1 px-5 py-2"
+			>
+				<AiFillThunderbolt />
+				Buy Now
+			</button>
+		);
+	};
+	const showStock = (quantity) => {
+		return quantity > 0 ? (
+			<span className="badge badge-primary badge-pill">In Stock </span>
+		) : (
+			<span className="badge badge-primary badge-pill">Out of Stock </span>
+		);
+	};
 
-  useEffect(() => {
-    const productId = props.match.params.productId;
-    loadSingleProduct(productId);
-  }, [props]);
+	useEffect(() => {
+		const productId = props.match.params.productId;
+		loadSingleProduct(productId);
+	}, [props]);
 
-  return (
-    // <Layout
-    // 	title={product && product.name}
-    // 	descripton={
-    // 		product && product.description && product.description.substring(0, 100)
-    // 	}
-    // 	className="container-fluid"
-    // >
-    <>
-      <Menu />
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div class="row justify-content-center rowProduct mt-5 pl-md-5">
-            <div class="Productbox shadowProduct p-4">
-              <Row className="mt-5 pt-5">
-                <Col md={7} lg={5} className="pb-5">
-                  <ShowImage
-                    item={product}
-                    url="product"
-                    height="300px"
-                    width="300px"
-                  />
-                  {showAddToCartBtn()}
-                  {showBuyNowBtn()}
-                </Col>
-                <Col md={4} lg={3} className="mt-4 mx-2">
-                  <h3>{product.name}</h3>
-                  <hr />
+	return (
+		// <Layout
+		// 	title={product && product.name}
+		// 	descripton={
+		// 		product && product.description && product.description.substring(0, 100)
+		// 	}
+		// 	className="container-fluid"
+		// >
+		<>
+			<Menu />
+			{loading ? (
+				<Loader />
+			) : (
+				<>
+					<div class="row justify-content-center rowProduct mt-5 pl-md-5">
+						<div class="Productbox shadowProduct p-4">
+							<Row className="mt-5 pt-5">
+								<Col md={7} lg={5} className="pb-5">
+									<ShowImage
+										item={product}
+										url="product"
+										height="300px"
+										width="300px"
+									/>
+									{showAddToCartBtn()}
+									{showBuyNowBtn()}
+								</Col>
+								<Col md={4} lg={3} className="mt-4 mx-2">
+									<h5>{product.name}</h5>
+									{console.log(product)}
+									<hr />
 
-                  <h6 className="text-muted">Description</h6>
-                  <p>{product.description}</p>
-                </Col>
+									<h6 className="text-muted">Description</h6>
+									<p>{product.description}</p>
+								</Col>
 
-                <Col md={11} lg={3} className="mx-auto">
-                  <ListGroup className="text-break">
-                    <ListGroup.Item>
-                      <Row>
-                        <span className="col-6 mb-5">Price</span>
-                        <span className="col-6 mb-5">₹{product.price}</span>
-                      </Row>
-                    </ListGroup.Item>
+								<Col md={11} lg={3} className="mx-auto">
+									<ListGroup className="text-break">
+										<ListGroup.Item>
+											<Row>
+												<span className="col-6 mb-5">Price</span>
+												<span className="col-6 mb-5">₹{product.price}</span>
+											</Row>
+										</ListGroup.Item>
 
-                    <ListGroup.Item>
-                      <Row>
-                        <span className="col-6 mb-5">Status</span>
-                        <span className="col-6 mb-5">
-                          {showStock(product.quantity)}
-                        </span>
-                      </Row>
-                    </ListGroup.Item>
-                  </ListGroup>
-                  {shouldRedirect(redirect)}
-                </Col>
-              </Row>
-            </div>
-            <div className="container mt-5">
-              <h4>Related products</h4>
-              <div className="row">
-                {relatedProduct.map((p, i) => (
-                  <div className="col-md-4 col-12 " key={i}>
-                    <CardDetails product={p} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </>
-    // </Layout>
-  );
+										<ListGroup.Item>
+											<Row>
+												<span className="col-6 mb-5">Status</span>
+												<span className="col-6 mb-5">
+													{showStock(product.quantity)}
+												</span>
+											</Row>
+										</ListGroup.Item>
+									</ListGroup>
+									{shouldRedirect(redirect)}
+								</Col>
+							</Row>
+						</div>
+						<div className="container mt-5">
+							<h4>Related products</h4>
+							<div className="row">
+								{relatedProduct.map((p, i) => (
+									<div className="col-md-4 col-12 " key={i}>
+										<CardDetails product={p} />
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				</>
+			)}
+		</>
+		// </Layout>
+	);
 };
 
 export default Product;

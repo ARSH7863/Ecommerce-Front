@@ -50,7 +50,7 @@ export default function CartItem({ product, handleRefresh }) {
 							item={product}
 							url="product"
 							height="180px"
-							width="180px"
+							width="200px"
 						/>
 					</Link>
 					{/* {showCartUpdateOptions()} */}

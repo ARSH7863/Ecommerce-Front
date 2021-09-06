@@ -6,7 +6,6 @@ import {
 	createOrder,
 } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
-import CardDetails from "./CardDetails";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 // import "braintree-web"; // not using this package
@@ -56,7 +55,15 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 			<div>{showDropIn()}</div>
 		) : (
 			<Link to="/signin">
-				<button className="btn btn-primary">Sign in to checkout</button>
+				<div className="text-center pt-2">
+					<button className="btn btn-outline-primary">
+						Sign in to checkout{" "}
+						<img
+							src="https://img.icons8.com/fluency/25/000000/checkout.png"
+							style={{ objectFit: "contain" }}
+						/>
+					</button>
+				</div>
 			</Link>
 		);
 	};
@@ -68,18 +75,19 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 		// send the nonce to your server
 		// nonce = data.instance.requestPaymentMethod()
 		let nonce;
+
 		let getNonce = data.instance
 			.requestPaymentMethod()
 			.then((data) => {
-				// console.log(data);
+				console.log(data);
 				nonce = data.nonce;
 				// once you have nonce (card type, card number) send nonce as 'paymentMethodNonce'
 				// and also total to be charged
-				// console.log(
-				//     "send nonce and total to process: ",
-				//     nonce,
-				//     getTotal(products)
-				// );
+				console.log(
+					"send nonce and total to process: ",
+					nonce,
+					getTotal(products)
+				);
 				const paymentData = {
 					paymentMethodNonce: nonce,
 					amount: getTotal(products),
@@ -148,38 +156,44 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 						}}
 						onInstance={(instance) => (data.instance = instance)}
 					/>
-					<button onClick={buy} className="btn btn-success btn-block">
-						Pay
-					</button>
+					{data.success ? null : (
+						<button
+							onClick={buy}
+							className="btn btn-success btn-block"
+							disabled={data.loading == true}
+						>
+							Pay
+						</button>
+					)}
 				</div>
 			) : null}
 		</div>
 	);
 
 	const showError = (error) => (
-		<div
-			className="alert alert-danger"
+		<h6
+			className="text-center text-muted p-4"
 			style={{ display: error ? "" : "none" }}
 		>
-			{error}
-		</div>
+			Please SignIn to Procede
+		</h6>
 	);
 
 	const showSuccess = (success) => (
-		<div
-			className="alert alert-info"
+		<h6
+			className=" text-center p-4 text-success"
 			style={{ display: success ? "" : "none" }}
 		>
 			Thanks! Your payment was successful!
-		</div>
+		</h6>
 	);
 
 	const showLoading = (loading) =>
-		loading && <h2 className="text-danger">Loading...</h2>;
+		loading && <h6 className="text-center text-muted p-4">Loading...</h6>;
 
 	return (
-		<div className="pt-5">
-			<h2>Total: ${getTotal()}</h2>
+		<div>
+			<h4 className="text-center">Total: ${getTotal()}</h4>
 			{showLoading(data.loading)}
 			{showSuccess(data.success)}
 			{showError(data.error)}

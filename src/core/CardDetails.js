@@ -5,7 +5,7 @@ import moment from "moment";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
 import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import "../core/CardDetails.css";
+import "../assets/css/CardDetails.css";
 
 const CardDetails = ({
 	product,

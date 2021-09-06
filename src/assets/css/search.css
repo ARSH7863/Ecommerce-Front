@@ -6,12 +6,6 @@
 	cursor: pointer;
 }
 
-/* Blue */
-.info {
-	border-color: #2196f3;
-	color: dodgerblue;
-}
-
 .default {
 	border-color: #e7e7e7;
 	color: black;

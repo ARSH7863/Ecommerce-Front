@@ -1,0 +1,9 @@
+.paddingCart {
+	padding-left: 1rem;
+}
+
+@media screen and (min-width: 480px) {
+	.paddingCart {
+		padding-left: 0;
+	}
+}

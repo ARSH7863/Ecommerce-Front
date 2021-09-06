@@ -7,6 +7,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import { removeItem, updateItem } from "./cartHelpers";
 import { MdDeleteForever } from "react-icons/md";
+import "../assets/css/cartItem.css";
 
 export default function CartItem({ product, handleRefresh }) {
 	const [count, setCount] = useState(product.count);
@@ -31,7 +32,7 @@ export default function CartItem({ product, handleRefresh }) {
 					removeItem(product._id);
 					handleRefresh(); // run useEffect in parent Cart
 				}}
-				className="removeProduct px-5"
+				className="removeProduct pl-5"
 			>
 				<MdDeleteForever fontSize="25px" />
 			</span>
@@ -43,8 +44,8 @@ export default function CartItem({ product, handleRefresh }) {
 
 	return (
 		<>
-			<div className="row">
-				<div className="col-md-4 col-12">
+			<div className="row paddingCart">
+				<div className="col-md-4 col-12 ">
 					<Link onClick={() => showProduct(product)}>
 						<ShowImage
 							item={product}
@@ -54,11 +55,10 @@ export default function CartItem({ product, handleRefresh }) {
 						/>
 					</Link>
 					{/* {showCartUpdateOptions()} */}
-					<div className="row">
+					<div className="row ">
 						<div className="col-md-4 col-3">
 							<button
-								className="btn btn-outline-info"
-								style={{ borderRadius: "50%" }}
+								className="btn btn-default rounded-circle"
 								onClick={() => decreaseNum(product)}
 								disabled={count == 1}
 							>
@@ -67,7 +67,7 @@ export default function CartItem({ product, handleRefresh }) {
 						</div>
 						<div className="col-md-6 col-5">
 							<input
-								className="form-control"
+								className="form-control text-center"
 								type="number"
 								value={count}
 								disabled
@@ -75,9 +75,9 @@ export default function CartItem({ product, handleRefresh }) {
 						</div>
 						<div className="col-md-2 col-1 pl-md-1">
 							<button
-								className="btn btn-outline-info"
-								style={{ borderRadius: "50%" }}
+								className="btn btn-default rounded-circle"
 								onClick={() => increNum(product)}
+								disabled={count == product.quantity}
 							>
 								<AiOutlinePlus />
 							</button>
@@ -90,14 +90,14 @@ export default function CartItem({ product, handleRefresh }) {
 						className="cartlink"
 						style={{ textDecoration: "none" }}
 					>
-						<h5 className="font-weight-light">{product.name}</h5>
+						<h5 className="font-weight-light pl-2">{product.name}</h5>
 					</Link>
 					{console.log(product)}
-					<p className="font-weight-light">
+					<p className="font-weight-light pl-2">
 						Category: {product.category && product.category.name}
 					</p>
 					<br />
-					<h5>
+					<h5 className="pl-2">
 						${product.price * product.count} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 						&nbsp;
 						{showRemoveButton(product)}

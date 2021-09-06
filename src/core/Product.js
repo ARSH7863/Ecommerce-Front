@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Menu from "../core/Menu";
 import { read, listRelated } from "./apiCore";
 import { Redirect } from "react-router-dom";
+import { isAuthenticated } from "../auth";
 import { addItem } from "./cartHelpers";
 import CardDetails from "./CardDetails";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import ShowImage from "./ShowImage";
-import { Col, Row, ListGroup } from "react-bootstrap";
+import moment from "moment";
+import { Row } from "react-bootstrap";
 import Loader from "../Loader/Loader";
 import "../assets/css/Product.css";
 
@@ -17,6 +19,7 @@ const Product = (props) => {
 	const [redirect, setRedirect] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [inCart, setInCart] = useState(false);
 
 	const loadSingleProduct = (productId) => {
 		setLoading(true);
@@ -55,7 +58,15 @@ const Product = (props) => {
 				onClick={addToCart}
 				className="btn btn-warning ml-3 mb-2 text-white px-3 py-2"
 			>
-				<FaShoppingCart color="white" /> Add to cart
+				{inCart ? (
+					<>
+						<FaShoppingCart color="white" /> Go to cart{" "}
+					</>
+				) : (
+					<>
+						<FaShoppingCart color="white" /> Add to cart
+					</>
+				)}
 			</button>
 		);
 	};
@@ -79,6 +90,18 @@ const Product = (props) => {
 	useEffect(() => {
 		const productId = props.match.params.productId;
 		loadSingleProduct(productId);
+		let cart = [];
+
+		if (localStorage.getItem("cart")) {
+			cart = JSON.parse(localStorage.getItem("cart"));
+		}
+
+		cart.forEach((item) => {
+			if (item._id === productId) {
+				setInCart(true);
+				return;
+			}
+		});
 	}, [props]);
 
 	return (
@@ -108,27 +131,49 @@ const Product = (props) => {
 											width="300px"
 										/>
 									</div>
+									{console.log(product)}
 									<div className="col-md-1 col-12 mt-4"></div>
-									<div className="col-md-6 col-12 mt-4 ">
+									<div className="col-md-7 col-12 mt-4 ">
 										<h5>{product.name}</h5>
 										<hr />
-
 										<h6 className="text-muted">Description</h6>
 										<p>{product.description}</p>
-										<h6>Price : ${product.price}</h6>
-										<h6>Status : {showStock(product.quantity)}</h6>
+										<h6 className="text-muted">Price </h6>{" "}
+										<p>${product.price}</p>
+										<h6 className="text-muted">Status</h6>
+										<p>{showStock(product.quantity)}</p>
+										{isAuthenticated() && isAuthenticated().user.role === 1 && (
+											<>
+												<h6 className="text-muted">Added on</h6>
+												<p>{moment(product.createdAt).fromNow()}</p>
+											</>
+										)}
+										{isAuthenticated() && isAuthenticated().user.role === 1 && (
+											<>
+												<h6 className="text-muted">Product remaining</h6>
+												<p>{product.quantity}</p>
+											</>
+										)}
+										{isAuthenticated() && isAuthenticated().user.role === 1 && (
+											<>
+												<h6 className="text-muted">Product Sold</h6>
+												<p>{product.sold}</p>
+											</>
+										)}
 									</div>
 								</div>
 								{shouldRedirect(redirect)}
-								<Row>
-									<span className="col-md-1"></span>
-									<span className="col-md-1 mr-md-4 col-6">
-										{showAddToCartBtn()}
-									</span>
-									<span className="col-md-2 ml-md-5 col-6">
-										{showBuyNowBtn()}
-									</span>
-								</Row>
+								{product.quantity > 0 ? (
+									<Row>
+										<span className="col-md-1"></span>
+										<span className="col-md-1 mr-md-4 col-6">
+											{showAddToCartBtn()}
+										</span>
+										<span className="col-md-2 ml-md-5 col-6">
+											{showBuyNowBtn()}
+										</span>
+									</Row>
+								) : null}
 							</div>
 							{/* <Row className="mt-5">
 								<Col md={4} lg={5} className="mb-5 text-center"></Col>

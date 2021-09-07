@@ -1,0 +1,54 @@
+html,
+body {
+  width: auto !important;
+  overflow-x: hidden !important;
+  height: 100vh !important;
+}
+.rowProductCard {
+  margin: 0.5rem;
+  padding-top: 2rem;
+}
+
+.shadowProductCard {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.shadowProductCard:hover {
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+.shadowProductCard-nohover {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ProductboxCard {
+  border-radius: 0.3rem;
+  width: 22rem;
+  height: auto;
+}
+.cartProductCard {
+  height: 30vh !important;
+  width: 50vw !important;
+}
+
+@media screen and (min-width: 480px) {
+  .ProductboxCard {
+    width: 70rem;
+    height: auto;
+  }
+}
+
+.ProductlinkCard {
+  color: black;
+}
+
+.removeProductCard {
+  cursor: pointer;
+}
+.removeProductCard:hover {
+  color: red;
+}

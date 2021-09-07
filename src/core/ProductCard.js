@@ -1,14 +1,20 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import "../assets/css/ProductCard.css";
 
 const ProductCard = ({ product }) => {
+  let history = useHistory();
+
   const showStock = (quantity) => {
     return quantity > 0 ? (
       <span className="text-center text-success">IN STOCK</span>
     ) : (
       <span className="text-center text-danger">OUT OF STOCK</span>
     );
+  };
+  const showProduct = () => {
+    history.push(`/product/${product._id}`);
   };
 
   return (
@@ -18,17 +24,25 @@ const ProductCard = ({ product }) => {
           <div className="row">
             {/* <div className="col-md-1 col-12 mt-4"></div> */}
             <div className="col-md-3 col-12 mb-5 mt-5 text-center">
-              <ShowImage
-                item={product}
-                url="product"
-                height="200px"
-                width="200px"
-              />
+              <Link onClick={showProduct}>
+                <ShowImage
+                  item={product}
+                  url="product"
+                  height="195px"
+                  width="175px"
+                />
+              </Link>
             </div>
             {console.log(product)}
             <div className="col-md-1 col-12 mt-4"></div>
             <div className="col-md-7 col-12 mt-4 ">
-              <h5>{product.name}</h5>
+              <Link
+                className="productLink"
+                onClick={showProduct}
+                style={{ textDecoration: "none" }}
+              >
+                <span className="font-weight-normal ">{product.name}</span>
+              </Link>
               <hr />
               <span className="font-weight-light">
                 {product.category && product.category.name}

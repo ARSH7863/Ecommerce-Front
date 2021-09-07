@@ -134,12 +134,21 @@ const CardDetails = ({
 
         {showCartUpdateOptions(cartUpdate)}
       </div> */}
-			<div class="row justify-content-center rowCard">
-				<div class="box shadow p-4 boxCard">
-					<div className="col-sm-12 ml-2 mr-5">
+			<div className="row justify-content-center rowCard">
+				<div className="box shadow p-4 boxCard">
+					<div className="col-sm-12 ml-1">
 						{shouldRedirect(redirect)}
 
 						<Link onClick={showProduct}>
+							{product.quantity === 0 ? (
+								<div
+									className="text-white bg-danger position-absolute card-header"
+									style={{ top: "20%", paddingLeft: "60px" }}
+								>
+									<h6 className="mr-4 mt-1">Out of stock</h6>
+								</div>
+							) : null}
+
 							<ShowImage
 								item={product}
 								url="product"
@@ -147,6 +156,7 @@ const CardDetails = ({
 								width="175px"
 							/>
 						</Link>
+
 						<hr />
 						<Link
 							className="productLink"

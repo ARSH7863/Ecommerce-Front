@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
                 <ShowImage
                   item={product}
                   url="product"
-                  height="195px"
-                  width="175px"
+                  height="175px"
+                  width="160px"
                 />
               </Link>
             </div>
@@ -41,7 +41,7 @@ const ProductCard = ({ product }) => {
                 onClick={showProduct}
                 style={{ textDecoration: "none" }}
               >
-                <span className="font-weight-normal ">{product.name}</span>
+                <h5 className="font-weight-normal ">{product.name}</h5>
               </Link>
               <hr />
               <span className="font-weight-light">

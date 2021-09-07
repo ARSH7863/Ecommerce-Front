@@ -226,16 +226,20 @@ const UpdateProduct = ({ match }) => {
 		// >
 		<>
 			<Menu />
-			<br />
-			<h5 className="pt-3">Good DAY {name}, ready to update your product?</h5>
-			<hr />
-			<div className="row">
-				<div className="col-md-8 offset-md-2">
-					{showLoading()}
-					{showSuccess()}
-					{showError()}
-					{newPostForm()}
-					{redirectUser()}
+
+			<div style={{ paddingTop: "70px" }}>
+				<h5 className="text-center">
+					Good DAY {name}, ready to update your product?
+				</h5>
+				<hr />
+				<div className="row">
+					<div className="col-md-8 offset-md-2">
+						{showLoading()}
+						{showSuccess()}
+						{showError()}
+						{newPostForm()}
+						{redirectUser()}
+					</div>
 				</div>
 			</div>
 		</>

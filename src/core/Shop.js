@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CardDetails from "./CardDetails.js";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
 import { prices } from "./fixedPrices";
@@ -8,6 +7,7 @@ import Menu from "./Menu";
 import "../assets/css/shop.css";
 import Loader from "../Loader/Loader.js";
 import ProductCard from "./ProductCard.js";
+import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider";
 
 const Shop = () => {
 	const [myFilters, setMyFilters] = useState({
@@ -127,20 +127,6 @@ const Shop = () => {
 			</h3>
 			<div className="row">
 				<div className="col-md-2 col-12">
-					{/* <h4>Filter By Category</h4>
-          <ul>
-            <Checkbox
-              categories={categories}
-              handleFilters={(filters) => handleFilters(filters, "category")}
-            />
-          </ul>
-          <h4>Filter by price range</h4>
-          <div>
-            <RadioBox
-              prices={prices}
-              handleFilters={(filters) => handleFilters(filters, "price")}
-            />
-          </div> */}
 					<div className="sidebar">
 						<h4>Filter By Category</h4>
 						<ul>
@@ -156,6 +142,13 @@ const Shop = () => {
 								handleFilters={(filters) => handleFilters(filters, "price")}
 							/>
 						</div>
+						<MultiRangeSlider
+							min={0}
+							max={1000}
+							onChange={({ min, max }) =>
+								console.log(`min = ${min}, max = ${max}`)
+							}
+						/>
 					</div>
 				</div>
 

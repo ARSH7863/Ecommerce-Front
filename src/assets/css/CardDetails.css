@@ -32,7 +32,7 @@
 .productLink {
 	color: black;
 }
-.ribbon {
+/* .ribbon {
 	width: 150px;
 	height: 150px;
 	overflow: hidden;
@@ -45,6 +45,8 @@
 	content: "";
 	display: block;
 	border: 5px solid red;
+}
+@media screen and (min-width: 480px) {
 }
 .ribbon span {
 	position: absolute;
@@ -60,10 +62,17 @@
 	text-align: center;
 }
 
-.ribbon-topRight {
+.boxCard .ribbon-topRight {
 	top: 10px;
-	right: 25px;
+	right: 45px;
 	z-index: 1;
+}
+@media screen and (min-width: 480px) {
+	.ribbon-topRight {
+		top: 10px;
+		right: 50px;
+		z-index: 1;
+	}
 }
 .ribbon-topRight::before,
 .ribbon-topRight::after {
@@ -82,4 +91,4 @@
 	left: -25px;
 	top: 30px;
 	transform: rotate(45deg);
-}
+} */

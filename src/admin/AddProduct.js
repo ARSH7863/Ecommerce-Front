@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../auth";
 import Menu from "../core/Menu";
-// import { Link } from 'react-router-dom';
+import { FiUpload } from "react-icons/fi";
 import { createProduct, getCategories } from "./apiAdmin";
 import "../assets/css/AddProduct.css";
 
@@ -161,17 +161,19 @@ const AddProduct = () => {
           value={expectedDeliveryDate}
         />
       </div>
-
-      <h4>Post Photo</h4>
+      <br />
       <div className="form-group">
-        <label className="btn btn-secondary">
+        <label className="btn btn-primary ">
+          Upload Photo <FiUpload />
           <input
             onChange={handleChange("photo")}
             type="file"
             name="photo"
             accept="image/*"
+            hidden
           />
         </label>
+        <p>{values.photo.name}</p>
       </div>
       <br />
       <button className="btn btn-outline-primary">Create Product</button>

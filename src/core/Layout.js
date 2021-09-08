@@ -19,13 +19,14 @@ const Layout = ({
         <h2>{title}</h2>
         <p className="lead"> {descripton} </p>
       </div> */}
-			<div className="pt-5">
+			<div className="pt-5 h-75">
 				<Carousel fade>
 					<Carousel.Item interval={1500}>
 						<img
 							className="d-block w-100"
 							src={carsouselPhoto1}
 							alt="First slide"
+							style={{ objectFit: "contain" }}
 						/>
 						{/* <Carousel.Caption>
 						<h3>First slide label</h3>
@@ -34,9 +35,10 @@ const Layout = ({
 					</Carousel.Item>
 					<Carousel.Item interval={1500}>
 						<img
-							className="w-50 d-block w-100"
+							className="d-block w-100"
 							src={carsouselPhoto2}
 							alt="Second slide"
+							style={{ objectFit: "contain" }}
 						/>
 
 						{/* <Carousel.Caption>
@@ -49,6 +51,7 @@ const Layout = ({
 							className="d-block w-100"
 							src={carsouselPhoto3}
 							alt="Third slide"
+							style={{ objectFit: "contain" }}
 						/>
 
 						{/* <Carousel.Caption>

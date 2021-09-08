@@ -60,7 +60,11 @@ const Cart = ({ history }) => {
 					<h6>
 						My Cart. <br />
 						<div className="text-center pt-5">
-							<img src={cartPhoto} className="cartImg" />
+							<img
+								src={cartPhoto}
+								className="cartImg"
+								style={{ objectFit: "contain" }}
+							/>
 						</div>
 						<br />
 						<h5 className="text-center">Missing Cart items?</h5>

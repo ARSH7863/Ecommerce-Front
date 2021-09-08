@@ -136,19 +136,16 @@ const CardDetails = ({
       </div> */}
 			<div className="row justify-content-center rowCard">
 				<div className="box shadow p-4 boxCard">
+					{product.quantity === 0 ? (
+						<div class="ribbon ribbon-topRight">
+							<span>out of stock</span>
+						</div>
+					) : null}
+
 					<div className="col-sm-12 ml-1">
 						{shouldRedirect(redirect)}
 
 						<Link onClick={showProduct}>
-							{product.quantity === 0 ? (
-								<div
-									className="text-white bg-danger position-absolute card-header"
-									style={{ top: "20%", paddingLeft: "60px" }}
-								>
-									<h6 className="mr-4 mt-1">Out of stock</h6>
-								</div>
-							) : null}
-
 							<ShowImage
 								item={product}
 								url="product"

@@ -22,6 +22,8 @@ const Shop = () => {
 	const [size, setSize] = useState(0);
 	const [filteredResults, setFilteredResults] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [maximum, setMaximum] = useState(0);
+	const [minimum, setMinimum] = useState(40);
 
 	// load categories and set form data
 	const init = () => {
@@ -37,15 +39,18 @@ const Shop = () => {
 	};
 
 	const loadFilteredResults = (newFilters) => {
-		console.log(newFilters);
+		// console.log(newFilters);
+		setLoading(true);
 		const limit = 6;
 		getFilteredProducts(skip, limit, newFilters).then((data) => {
 			if (data.error) {
 				setError(data.error);
+				setLoading(false);
 			} else {
 				setFilteredResults(data.data);
 				setSize(data.size);
 				setSkip(0);
+				setLoading(false);
 			}
 		});
 	};
@@ -104,34 +109,48 @@ const Shop = () => {
 
 	const handleFilters = (filters, filterBy) => {
 		setLoading(true);
-		console.log("SHOP", filters, filterBy);
+		// console.log("SHOP", filters, filterBy);
 		const newFilters = { ...myFilters };
 		newFilters.filters[filterBy] = filters;
 
-		if (filterBy === "price") {
-			let priceValues = handlePrice(filters);
-			newFilters.filters[filterBy] = priceValues;
-		}
+		// if (filterBy === "price") {
+		// 	console.log("filters", filters);
+		// 	let priceValues = handlePrice(filters);
+		// 	newFilters.filters[filterBy] = priceValues;
+		// }
 		loadFilteredResults(myFilters.filters);
 		setMyFilters(newFilters);
 		setLoading(false);
 	};
 
-	const handlePrice = (value) => {
-		const data = prices;
-		let array = [];
+	// const handlePrice = (value) => {
+	// 	const data = prices;
+	// 	let array = [];
 
-		for (let key in data) {
-			if (data[key]._id === parseInt(value)) {
-				array = data[key].array;
-			}
-		}
-		return array;
+	// 	for (let key in data) {
+	// 		if (data[key]._id === parseInt(value)) {
+	// 			array = data[key].array;
+	// 		}
+	// 	}
+	// 	return array;
+	// };
+
+	const handleRange = (max, min) => {
+		setMaximum(max);
+		setMinimum(min);
 	};
 
-	// const filterProduct = (max, min) => {
-	// 	products.filter((product) => product.price >= min && product.price <= max);
-	// };
+	const changeRange = () => {
+		setLoading(true);
+		let array = [];
+		array[0] = minimum;
+		array[1] = maximum;
+		const newFilters = { ...myFilters };
+		newFilters.filters.price = array;
+		setMyFilters(newFilters);
+		loadFilteredResults(myFilters.filters);
+		setLoading(false);
+	};
 
 	return (
 		// <Layout
@@ -159,19 +178,31 @@ const Shop = () => {
 									/>
 								</ul>
 								<h5 className="text-center">Filter by price range</h5>
-								<div>
+								{/* <div>
 									<RadioBox
 										prices={prices}
 										handleFilters={(filters) => handleFilters(filters, "price")}
 									/>
-								</div>
+								</div> */}
+								<br />
+
 								<MultiRangeSlider
 									min={0}
 									max={40}
-									onChange={({ min, max }) =>
-										console.log(`min = ${min}, max = ${max}`)
-									}
+									onChange={({ min, max }) => handleRange(max, min)}
 								/>
+								<br />
+								<br />
+
+								<div className="text-center">
+									<button
+										className="btn btn-outline-info"
+										onClick={changeRange}
+									>
+										Filter
+									</button>
+								</div>
+								{console.log("max: ", maximum, "min:", minimum)}
 								{/* {console.log(product)} */}
 							</div>
 						</div>

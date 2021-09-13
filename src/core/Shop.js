@@ -13,6 +13,7 @@ const Shop = () => {
 	const [myFilters, setMyFilters] = useState({
 		filters: { category: [], price: [] },
 	});
+	// const [product, setProduct] = useState();
 
 	const [categories, setCategories] = useState([]);
 	const [error, setError] = useState(false);
@@ -49,6 +50,19 @@ const Shop = () => {
 		});
 	};
 
+	// const loadProduct = () => {
+	// 	setLoading(true);
+	// 	list().then((data) => {
+	// 		if (data.error) {
+	// 			setError(data.error);
+	// 			setLoading(false);
+	// 		} else {
+	// 			setProduct(data);
+	// 			setLoading(false);
+	// 		}
+	// 	});
+	// };
+
 	const loadMore = () => {
 		let toSkip = skip + limit;
 		// console.log(newFilters);
@@ -83,6 +97,7 @@ const Shop = () => {
 	useEffect(() => {
 		setLoading(true);
 		init();
+		// loadProduct();
 		loadFilteredResults(skip, limit, myFilters.filters);
 		setLoading(false);
 	}, []);
@@ -114,6 +129,10 @@ const Shop = () => {
 		return array;
 	};
 
+	// const filterProduct = (max, min) => {
+	// 	products.filter((product) => product.price >= min && product.price <= max);
+	// };
+
 	return (
 		// <Layout
 		//   title="Shop Page"
@@ -128,27 +147,34 @@ const Shop = () => {
 			<div className="row">
 				<div className="col-md-2 col-12">
 					<div className="sidebar">
-						<h4>Filter By Category</h4>
-						<ul>
-							<Checkbox
-								categories={categories}
-								handleFilters={(filters) => handleFilters(filters, "category")}
-							/>
-						</ul>
-						<h4>Filter by price range</h4>
-						<div>
-							<RadioBox
-								prices={prices}
-								handleFilters={(filters) => handleFilters(filters, "price")}
-							/>
+						<div className="rowFilter justify-content-center">
+							<div className="shadowFilter Filterbox">
+								<h5 className="text-center">Filter By Category</h5>
+								<ul>
+									<Checkbox
+										categories={categories}
+										handleFilters={(filters) =>
+											handleFilters(filters, "category")
+										}
+									/>
+								</ul>
+								<h5 className="text-center">Filter by price range</h5>
+								<div>
+									<RadioBox
+										prices={prices}
+										handleFilters={(filters) => handleFilters(filters, "price")}
+									/>
+								</div>
+								<MultiRangeSlider
+									min={0}
+									max={40}
+									onChange={({ min, max }) =>
+										console.log(`min = ${min}, max = ${max}`)
+									}
+								/>
+								{/* {console.log(product)} */}
+							</div>
 						</div>
-						<MultiRangeSlider
-							min={0}
-							max={1000}
-							onChange={({ min, max }) =>
-								console.log(`min = ${min}, max = ${max}`)
-							}
-						/>
 					</div>
 				</div>
 

@@ -226,19 +226,22 @@ const UpdateProduct = ({ match }) => {
 		// >
 		<>
 			<Menu />
-
-			<div style={{ paddingTop: "70px" }}>
-				<h5 className="text-center">
-					Good DAY {name}, ready to update your product?
-				</h5>
-				<hr />
-				<div className="row">
-					<div className="col-md-8 offset-md-2">
-						{showLoading()}
-						{showSuccess()}
-						{showError()}
-						{newPostForm()}
-						{redirectUser()}
+			<div class="row justify-content-center rowAddProduct">
+				<div class="AddProductbox shadowAddProduct p-3">
+					<div style={{ paddingTop: "70px" }}>
+						<h5 className="text-center">
+							Good DAY {name}, ready to update your product?
+						</h5>
+						<hr />
+						<div className="row">
+							<div className="col-md-8 offset-md-2">
+								{showLoading()}
+								{showSuccess()}
+								{showError()}
+								{newPostForm()}
+								{redirectUser()}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

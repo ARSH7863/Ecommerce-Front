@@ -21,13 +21,13 @@ const Shop = () => {
 	const [skip, setSkip] = useState(0);
 	const [size, setSize] = useState(0);
 	const [filteredResults, setFilteredResults] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [maximum, setMaximum] = useState(0);
 	const [minimum, setMinimum] = useState(40);
 
 	// load categories and set form data
 	const init = () => {
-		setLoading(true);
+		// setLoading(true);
 		getCategories().then((data) => {
 			if (data.error) {
 				setError(data.error);
@@ -35,7 +35,7 @@ const Shop = () => {
 				setCategories(data);
 			}
 		});
-		setLoading(false);
+		// setLoading(false);
 	};
 
 	const loadFilteredResults = (newFilters) => {
@@ -100,11 +100,10 @@ const Shop = () => {
 	};
 
 	useEffect(() => {
-		setLoading(true);
+		// setLoading(true);
 		init();
 		// loadProduct();
 		loadFilteredResults(skip, limit, myFilters.filters);
-		setLoading(false);
 	}, []);
 
 	const handleFilters = (filters, filterBy) => {
@@ -120,7 +119,7 @@ const Shop = () => {
 		// }
 		loadFilteredResults(myFilters.filters);
 		setMyFilters(newFilters);
-		setLoading(false);
+		// setLoading(false);
 	};
 
 	// const handlePrice = (value) => {
@@ -149,7 +148,6 @@ const Shop = () => {
 		newFilters.filters.price = array;
 		setMyFilters(newFilters);
 		loadFilteredResults(myFilters.filters);
-		setLoading(false);
 	};
 
 	return (

@@ -43,34 +43,40 @@ const ManageProducts = () => {
 		<>
 			<Menu />
 			<br />
-			<div className="row">
-				<div className="col-12">
-					<h5 className="">
-						Good Day {user.name}, You can Manage Your Products Here
-					</h5>
-					<hr />
-					<h2 className="text-center">Total {products.length} products</h2>
-					<hr />
-					<ul className="list-group">
-						{products.map((p, i) => (
-							<li
-								key={i}
-								className="list-group-item d-flex justify-content-between align-items-center"
-							>
-								<strong>{p.name}</strong>
-								<Link to={`/admin/product/update/${p._id}`}>
-									<span className="badge badge-warning badge-pill">Update</span>
-								</Link>
-								<span
-									onClick={() => destroy(p._id)}
-									className="badge badge-danger badge-pill"
-								>
-									Delete
-								</span>
-							</li>
-						))}
-					</ul>
-					<br />
+			<div class="row justify-content-center rowAddProduct">
+				<div class="AddProductbox shadowAddProduct p-3">
+					<div className="row">
+						<div className="col-12">
+							<h5 className="">
+								Good Day {user.name}, You can Manage Your Products Here
+							</h5>
+							<hr />
+							<h2 className="text-center">Total {products.length} products</h2>
+							<hr />
+							<ul className="list-group">
+								{products.map((p, i) => (
+									<li
+										key={i}
+										className="list-group-item d-flex justify-content-between align-items-center"
+									>
+										<strong>{p.name}</strong>
+										<Link to={`/admin/product/update/${p._id}`}>
+											<span className="badge badge-warning badge-pill">
+												Update
+											</span>
+										</Link>
+										<span
+											onClick={() => destroy(p._id)}
+											className="badge badge-danger badge-pill"
+										>
+											Delete
+										</span>
+									</li>
+								))}
+							</ul>
+							<br />
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

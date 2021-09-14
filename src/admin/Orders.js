@@ -91,60 +91,66 @@ const Orders = () => {
 		// >
 		<>
 			<Menu />
-			<br />
-			<div className="row ">
-				<div className="col-md-8 offset-md-2">
-					{showOrdersLength()}
-					<hr />
+			<div class="row justify-content-center rowAddProduct">
+				<div class="AddProductbox shadowAddProduct p-3">
+					<br />
+					<div className="row ">
+						<div className="col-md-8 offset-md-2">
+							{showOrdersLength()}
+							<hr />
 
-					{orders.map((o, oIndex) => {
-						return (
-							<div
-								className="mt-5"
-								key={oIndex}
-								style={{ borderBottom: "5px solid indigo" }}
-							>
-								<h6 className="text-center">
-									<span className="text-secondary">Order ID: {o._id}</span>
-								</h6>
-
-								<ul className="list-group mb-2">
-									<li className="list-group-item">{showStatus(o)}</li>
-									<li className="list-group-item">
-										Transaction ID: {o.transaction_id}
-									</li>
-									<li className="list-group-item">Amount: ${o.amount}</li>
-									<li className="list-group-item">Ordered by: {o.user.name}</li>
-									<li className="list-group-item">
-										Ordered on: {moment(o.createdAt).fromNow()}
-									</li>
-									<li className="list-group-item">
-										Delivery address: {o.address}
-									</li>
-								</ul>
-
-								<h3 className="mt-4 mb-4 font-italic">
-									Total products in the order: {o.products.length}
-								</h3>
-
-								{o.products.map((p, pIndex) => (
+							{orders.map((o, oIndex) => {
+								return (
 									<div
-										className="mb-4"
-										key={pIndex}
-										style={{
-											padding: "20px",
-											border: "1px solid indigo",
-										}}
+										className="mt-5"
+										key={oIndex}
+										style={{ borderBottom: "5px solid indigo" }}
 									>
-										{showInput("Product name", p.name)}
-										{showInput("Product price", p.price)}
-										{showInput("Product total", p.count)}
-										{showInput("Product Id", p._id)}
+										<h6 className="text-center">
+											<span className="text-secondary">Order ID: {o._id}</span>
+										</h6>
+
+										<ul className="list-group mb-2">
+											<li className="list-group-item">{showStatus(o)}</li>
+											<li className="list-group-item">
+												Transaction ID: {o.transaction_id}
+											</li>
+											<li className="list-group-item">Amount: ${o.amount}</li>
+											<li className="list-group-item">
+												Ordered by: {o.user.name}
+											</li>
+											<li className="list-group-item">
+												Ordered on: {moment(o.createdAt).fromNow()}
+											</li>
+											<li className="list-group-item">
+												Delivery address: {o.address}
+											</li>
+										</ul>
+
+										<h3 className="mt-4 mb-4 font-italic">
+											Total products in the order: {o.products.length}
+										</h3>
+
+										{o.products.map((p, pIndex) => (
+											<div
+												className="mb-4"
+												key={pIndex}
+												style={{
+													padding: "20px",
+													border: "1px solid indigo",
+												}}
+											>
+												{showInput("Product name", p.name)}
+												{showInput("Product price", p.price)}
+												{showInput("Product total", p.count)}
+												{showInput("Product Id", p._id)}
+											</div>
+										))}
 									</div>
-								))}
-							</div>
-						);
-					})}
+								);
+							})}
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
-import { prices } from "./fixedPrices";
-import RadioBox from "./Radiobox";
+import { FiFilter } from "react-icons/fi";
 import Menu from "./Menu";
 import "../assets/css/shop.css";
 import Loader from "../Loader/Loader.js";
@@ -24,6 +23,7 @@ const Shop = () => {
 	const [loading, setLoading] = useState(true);
 	const [maximum, setMaximum] = useState(0);
 	const [minimum, setMinimum] = useState(40);
+	const [showAndHide, setShowAndHide] = useState(true);
 
 	// load categories and set form data
 	const init = () => {
@@ -108,31 +108,11 @@ const Shop = () => {
 
 	const handleFilters = (filters, filterBy) => {
 		setLoading(true);
-		// console.log("SHOP", filters, filterBy);
 		const newFilters = { ...myFilters };
 		newFilters.filters[filterBy] = filters;
-
-		// if (filterBy === "price") {
-		// 	console.log("filters", filters);
-		// 	let priceValues = handlePrice(filters);
-		// 	newFilters.filters[filterBy] = priceValues;
-		// }
 		loadFilteredResults(myFilters.filters);
 		setMyFilters(newFilters);
-		// setLoading(false);
 	};
-
-	// const handlePrice = (value) => {
-	// 	const data = prices;
-	// 	let array = [];
-
-	// 	for (let key in data) {
-	// 		if (data[key]._id === parseInt(value)) {
-	// 			array = data[key].array;
-	// 		}
-	// 	}
-	// 	return array;
-	// };
 
 	const handleRange = (max, min) => {
 		setMaximum(max);
@@ -150,6 +130,40 @@ const Shop = () => {
 		loadFilteredResults(myFilters.filters);
 	};
 
+	const HideShow = () => {
+		if (showAndHide === true) {
+			setShowAndHide(false);
+		} else {
+			setShowAndHide(true);
+		}
+	};
+
+	const FilterData = () => (
+		<div className="shadowFilter Filterbox">
+			<h5 className="text-center">Filter By Category</h5>
+			<ul>
+				<Checkbox
+					categories={categories}
+					handleFilters={(filters) => handleFilters(filters, "category")}
+				/>
+			</ul>
+			<h5 className="text-center">Filter by price range</h5>
+			<br />
+			<MultiRangeSlider
+				min={0}
+				max={40}
+				onChange={({ min, max }) => handleRange(max, min)}
+			/>
+			<br />
+			<br />
+			<div className="text-center">
+				<button className="btn btn-outline-info" onClick={changeRange}>
+					Filter <FiFilter size="15" />
+				</button>
+			</div>
+		</div>
+	);
+
 	return (
 		// <Layout
 		//   title="Shop Page"
@@ -163,46 +177,54 @@ const Shop = () => {
 			</h3>
 			<div className="row">
 				<div className="col-md-2 col-12">
+					<div className="row">
+						<div className="col-8">
+							<span className="d-block d-xl-none d-lg-none">
+								Click Here to see the filter
+							</span>
+						</div>
+						<div className="col-4">
+							<button
+								onClick={HideShow}
+								className="btn btn-info d-block d-xl-none d-lg-none"
+								style={{ borderRadius: "25%" }}
+							>
+								{showAndHide ? "Hide" : "Show"}
+							</button>
+						</div>
+					</div>
 					<div className="sidebar">
 						<div className="rowFilter justify-content-center">
-							<div className="shadowFilter Filterbox">
-								<h5 className="text-center">Filter By Category</h5>
-								<ul>
-									<Checkbox
-										categories={categories}
-										handleFilters={(filters) =>
-											handleFilters(filters, "category")
-										}
+							{showAndHide ? (
+								<div className="shadowFilter Filterbox">
+									<h5 className="text-center">Filter By Category</h5>
+									<ul>
+										<Checkbox
+											categories={categories}
+											handleFilters={(filters) =>
+												handleFilters(filters, "category")
+											}
+										/>
+									</ul>
+									<h5 className="text-center">Filter by price range</h5>
+									<br />
+									<MultiRangeSlider
+										min={0}
+										max={40}
+										onChange={({ min, max }) => handleRange(max, min)}
 									/>
-								</ul>
-								<h5 className="text-center">Filter by price range</h5>
-								{/* <div>
-									<RadioBox
-										prices={prices}
-										handleFilters={(filters) => handleFilters(filters, "price")}
-									/>
-								</div> */}
-								<br />
-
-								<MultiRangeSlider
-									min={0}
-									max={40}
-									onChange={({ min, max }) => handleRange(max, min)}
-								/>
-								<br />
-								<br />
-
-								<div className="text-center">
-									<button
-										className="btn btn-outline-info"
-										onClick={changeRange}
-									>
-										Filter
-									</button>
+									<br />
+									<br />
+									<div className="text-center">
+										<button
+											className="btn btn-outline-info"
+											onClick={changeRange}
+										>
+											Filter <FiFilter size="15" />
+										</button>
+									</div>
 								</div>
-								{console.log("max: ", maximum, "min:", minimum)}
-								{/* {console.log(product)} */}
-							</div>
+							) : null}
 						</div>
 					</div>
 				</div>

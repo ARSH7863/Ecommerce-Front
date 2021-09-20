@@ -42,7 +42,7 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
 	}, [minVal, maxVal, onChange]);
 
 	return (
-		<div>
+		<div className="container-fluid">
 			<input
 				type="range"
 				min={min}

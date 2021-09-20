@@ -178,9 +178,9 @@ const Shop = () => {
 			<div className="row">
 				<div className="col-md-2 col-12">
 					<div className="row">
-						<div className="col-8">
+						<div className="ml-3 col-7">
 							<span className="d-block d-xl-none d-lg-none">
-								Click Here to see the filter
+								Click Here to {showAndHide ? "hide" : "see"} the filter
 							</span>
 						</div>
 						<div className="col-4">
@@ -193,6 +193,7 @@ const Shop = () => {
 							</button>
 						</div>
 					</div>
+					<hr />
 					<div className="sidebar">
 						<div className="rowFilter justify-content-center">
 							{showAndHide ? (
@@ -245,7 +246,7 @@ const Shop = () => {
 								<h3 className="pl-3 pt-5 text-center d-none d-lg-block  d-xl-block d-xl-none">
 									Products{" "}
 								</h3>
-								<hr />
+
 								<div className="row">
 									{filteredResults.map((product, i) => (
 										<div key={i} className="col-md-12 col-12 mb-3">

@@ -85,7 +85,6 @@ div.content {
 
 .rowFilter {
 	margin: 0.5rem;
-	padding-top: 2rem;
 }
 
 .shadowFilter {
@@ -102,7 +101,9 @@ div.content {
 @media screen and (max-width: 480px) {
 	.Filterbox {
 		border-radius: 0.3rem;
-		width: 100%;
-		height: 80vh;
+		margin-left: auto;
+		margin-right: auto;
+		width: 16rem;
+		height: 60vh;
 	}
 }

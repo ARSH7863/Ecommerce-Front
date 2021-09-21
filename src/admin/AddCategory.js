@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { isAuthenticated } from "../auth";
 import { createCategory } from "./apiAdmin";
 import Menu from "../core/Menu";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import "../assets/css/AddCategory.css";
 
 const AddCategory = () => {
@@ -46,7 +47,12 @@ const AddCategory = () => {
 				/>
 			</div>
 			<br />
-			<button className="btn btn-outline-primary">Create Category</button>
+			<div className="text-center">
+				<button className="btn btn-outline-primary">
+					<span>Create Category &nbsp;</span>
+					<AiOutlinePlusCircle size="18" />
+				</button>
+			</div>
 		</form>
 	);
 
@@ -88,9 +94,9 @@ const AddCategory = () => {
 				<Menu />
 				<br />
 				<div className="row">
-					<div className="col-md-8 offset-md-2">
+					<div className="col-md-10 offset-md-1">
 						<h5 className="pl-0">Create New Category Here...</h5>
-						<hr />
+						<br />
 						{newCategoryForm()}
 						{showSuccess()}
 						{showError()}

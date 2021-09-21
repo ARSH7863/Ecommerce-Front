@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { getProduct, getCategories, updateProduct } from "./apiAdmin";
 import Menu from "../core/Menu";
+import { FiUpload } from "react-icons/fi";
+import { BiPencil } from "react-icons/bi";
+import "../assets/css/UpdateProduct.css";
 
 const UpdateProduct = ({ match }) => {
 	const [values, setValues] = useState({
@@ -170,19 +172,35 @@ const UpdateProduct = ({ match }) => {
 					value={quantity}
 				/>
 			</div>
-			<h4>Post Photo</h4>
+
 			<div className="form-group">
-				<label className="btn btn-secondary">
+				{/* <label className="btn btn-secondary">
 					<input
 						onChange={handleChange("photo")}
 						type="file"
 						name="photo"
 						accept="image/*"
 					/>
+				</label> */}
+				<label className="btn btn-primary ">
+					Upload Photo <FiUpload />
+					<input
+						onChange={handleChange("photo")}
+						type="file"
+						name="photo"
+						accept="image/*"
+						hidden
+					/>
 				</label>
+				<p>{values.photo.name}</p>
 			</div>
 			<br />
-			<button className="btn btn-outline-primary">Update Product</button>
+			<div className="text-center">
+				<button className="btn btn-outline-primary">
+					Update Product &nbsp;
+					<BiPencil size="17px" />
+				</button>
+			</div>
 		</form>
 	);
 
@@ -226,15 +244,16 @@ const UpdateProduct = ({ match }) => {
 		// >
 		<>
 			<Menu />
-			<div class="row justify-content-center rowAddProduct">
-				<div class="AddProductbox shadowAddProduct p-3">
-					<div style={{ paddingTop: "70px" }}>
-						<h5 className="text-center">
-							Good DAY {name}, ready to update your product?
-						</h5>
-						<hr />
+			<div
+				className="row justify-content-center rowUpdateProduct 
+"
+			>
+				<div className="UpdateProductbox shadowUpdateProduct p-3">
+					<div style={{ paddingTop: "20px" }}>
+						<h5 className="offset-1">Update Product</h5>
+
 						<div className="row">
-							<div className="col-md-8 offset-md-2">
+							<div className="col-md-10 offset-md-1">
 								{showLoading()}
 								{showSuccess()}
 								{showError()}

@@ -3,6 +3,7 @@ import { isAuthenticated } from "../auth";
 import { listOrders, getStatusValues, updateOrderStatus } from "./apiAdmin";
 import moment from "moment";
 import Menu from "../core/Menu";
+import "../assets/css/Orders.css";
 
 const Orders = () => {
 	const [orders, setOrders] = useState([]);
@@ -91,14 +92,60 @@ const Orders = () => {
 		// >
 		<>
 			<Menu />
-			<div class="row justify-content-center rowAddProduct">
-				<div class="AddProductbox shadowAddProduct p-3">
+			<div class="row justify-content-center rowOrders">
+				<div class="shadowOrders Ordersbox p-3">
 					<br />
-					<div className="row ">
-						<div className="col-md-8 offset-md-2">
+					<div className="row">
+						<div className="col-md-12 ">
 							{showOrdersLength()}
 							<hr />
 
+							<div class="table-responsive">
+								<table class="table  table-hover">
+									<thead className="table-primary">
+										<tr>
+											<th>Id</th>
+											<th>Order On</th>
+											<th>Ordered By</th>
+											<th>Status</th>
+											<th>Total Products</th>
+										</tr>
+									</thead>
+									<tbody>
+										{orders.map((o, oIndex) => (
+											<tr>
+												<td key={oIndex}>
+													<span className="font-weight-normal">{o._id}</span>
+												</td>
+												<td>
+													<span className="font-weight-normal">
+														{moment(o.createdAt).fromNow()}
+													</span>
+												</td>
+												<td>
+													<span className="font-weight-normal">
+														{o.user.name}
+													</span>
+												</td>
+												<td>
+													{o.status === "Update Status" ? (
+														<span className="font-weight-normal">Not set</span>
+													) : (
+														<span className="font-weight-normal">
+															{o.status}
+														</span>
+													)}
+												</td>
+												<td>
+													<span className="font-weight-normal text-success ml-5">
+														{o.products.length}
+													</span>
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
 							{orders.map((o, oIndex) => {
 								return (
 									<div

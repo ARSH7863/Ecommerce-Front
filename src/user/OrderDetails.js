@@ -1,23 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import { isAuthenticated } from "../auth";
-import { listOrders, getStatusValues, updateOrderStatus } from "./apiAdmin";
 import moment from "moment";
-import Menu from "../core/Menu";
-import { useHistory, Link } from "react-router-dom";
-import "../assets/css/Orders.css";
+import {
+	listOrders,
+	getStatusValues,
+	updateOrderStatus,
+} from "../admin/apiAdmin";
+import Loader from "../Loader/Loader";
 
-const Orders = () => {
+export default function OrderDetails() {
 	const [orders, setOrders] = useState([]);
+	const [id, setId] = useState("hii");
+	const [loading, setLoading] = useState(true);
 	const [statusValues, setStatusValues] = useState([]);
-	const history = useHistory();
+	const location = useLocation();
+
 	const { user, token } = isAuthenticated();
 
 	const loadOrders = () => {
+		setLoading(true);
 		listOrders(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
+				setLoading(false);
 			} else {
 				setOrders(data);
+				setLoading(false);
 			}
 		});
 	};
@@ -30,23 +39,6 @@ const Orders = () => {
 				setStatusValues(data);
 			}
 		});
-	};
-
-	useEffect(() => {
-		loadOrders();
-		loadStatusValues();
-	}, []);
-
-	const showOrdersLength = () => {
-		if (orders.length > 0) {
-			return (
-				<h5 className="text-danger text-center">
-					Total orders: {orders.length}
-				</h5>
-			);
-		} else {
-			return <h5 className="text-danger text-center">No orders</h5>;
-		}
 	};
 
 	const showInput = (key, value) => (
@@ -85,86 +77,28 @@ const Orders = () => {
 		</div>
 	);
 
-	const OrderDetail = (id) => {
-		history.push({
-			pathname: `/admin/dashboard/${id}`,
-			state: {
-				id: id,
-			},
-		});
-	};
-	return (
-		// <Layout
-		//   title="Orders"
-		//   descripton={`G'day ${user.name}, you can manage all the orders here`}
-		//   className="container-fluid"
-		// >
-		<>
-			<Menu />
-			<div class="row justify-content-center rowOrders">
-				<div class="shadowOrders Ordersbox p-3">
-					<br />
-					<div className="row">
-						<div className="col-md-12 ">
-							{showOrdersLength()}
-							<hr />
+	useEffect(() => {
+		if (location.state && location.state.id) {
+			setId(location.state.id);
+			console.log(location.state.id);
+		}
 
-							<div class="table-responsive">
-								<table class="table  table-hover">
-									<thead className="table-primary">
-										<tr>
-											<th>Id</th>
-											<th>Order On</th>
-											<th>Ordered By</th>
-											<th>Status</th>
-											<th>Total Products</th>
-										</tr>
-									</thead>
-									<tbody>
-										{orders.map((o, oIndex) => (
-											<tr>
-												<td key={oIndex}>
-													<Link
-														className="productLink"
-														onClick={() => OrderDetail(o._id)}
-														style={{ textDecoration: "none" }}
-													>
-														<span className="font-weight-normal">{o._id}</span>
-													</Link>
-												</td>
-												<td>
-													<span className="font-weight-normal">
-														{moment(o.createdAt).fromNow()}
-													</span>
-												</td>
-												<td>
-													<span className="font-weight-normal">
-														{o.user.name}
-													</span>
-												</td>
-												<td>
-													{o.status === "Update Status" ? (
-														<span className="font-weight-normal">Not set</span>
-													) : (
-														<span className="font-weight-normal">
-															{o.status}
-														</span>
-													)}
-												</td>
-												<td>
-													<span className="font-weight-normal text-success ml-5">
-														{o.products.length}
-													</span>
-												</td>
-											</tr>
-										))}
-									</tbody>
-								</table>
-							</div>
-							{orders.map((o, oIndex) => {
-								return (
+		loadOrders();
+		loadStatusValues();
+	}, [location.state]);
+
+	return (
+		<>
+			{loading ? (
+				<Loader />
+			) : (
+				<>
+					{orders.map((o, oIndex) => (
+						<>
+							{id === o._id ? (
+								<>
 									<div
-										className="mt-5"
+										className="mt-5 container"
 										key={oIndex}
 										style={{ borderBottom: "5px solid indigo" }}
 									>
@@ -209,15 +143,12 @@ const Orders = () => {
 											</div>
 										))}
 									</div>
-								);
-							})}
-						</div>
-					</div>
-				</div>
-			</div>
+								</>
+							) : null}
+						</>
+					))}
+				</>
+			)}
 		</>
-		// </Layout>
 	);
-};
-
-export default Orders;
+}

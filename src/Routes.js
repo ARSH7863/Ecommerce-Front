@@ -17,6 +17,7 @@ import Profile from "./user/Profile";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 import PlaceOrder from "./core/PlaceOrder";
+import OrderDetails from "./user/OrderDetails";
 
 const Routes = () => {
 	return (
@@ -31,7 +32,7 @@ const Routes = () => {
 				<Route path="/checkout" exact component={PlaceOrder} />
 				<PrivateRoute path="/user/dashboard" exact component={Dashboard} />
 				<PrivateRoute path="/profile/:userId" exact component={Profile} />
-				<PrivateRoute path="/admin/products" exact component={ManageProducts} />
+				<AdminRoute path="/admin/products" exact component={ManageProducts} />
 				<AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
 				<AdminRoute path="/create/category" exact component={AddCategory} />
 				<AdminRoute path="/create/product" exact component={AddProduct} />
@@ -40,6 +41,11 @@ const Routes = () => {
 					path="/admin/product/update/:productId"
 					exact
 					component={UpdateProduct}
+				/>
+				<AdminRoute
+					path="/admin/dashboard/:OrderId"
+					exact
+					component={OrderDetails}
 				/>
 			</Switch>
 		</BrowserRouter>

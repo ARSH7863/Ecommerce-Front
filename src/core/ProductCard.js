@@ -6,23 +6,23 @@ import "../assets/css/ProductCard.css";
 const ProductCard = ({ product }) => {
 	let history = useHistory();
 
-	const showStock = (quantity) => {
-		return quantity > 0 ? (
-			<span className="text-center text-success">IN STOCK</span>
-		) : (
-			<span className="text-center text-danger">OUT OF STOCK</span>
-		);
-	};
+	// const showStock = (quantity) => {
+	// 	return quantity > 0 ? (
+	// 		<span className="text-center text-success">IN STOCK</span>
+	// 	) : (
+	// 		<span className="text-center text-danger">OUT OF STOCK</span>
+	// 	);
+	// };
 	const showProduct = () => {
 		history.push(`/product/${product._id}`);
 	};
 
 	return (
-		<div class="row justify-content-center rowProductCard mt-1 pl-md-5">
-			<div class="ProductboxCard shadowProductCard p-4">
+		<div className="row justify-content-center rowProductCard mt-1 pl-md-5">
+			<div className="ProductboxCard shadowProductCard p-4">
 				<div className="container-fluid">
 					{product.quantity === 0 ? (
-						<div class="ribbon ribbon-top-right">
+						<div className="ribbon ribbon-top-right">
 							<span>out of stock</span>
 						</div>
 					) : null}

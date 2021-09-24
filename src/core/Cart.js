@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "./cartHelpers";
-import { removeItem } from "./cartHelpers";
 import cartPhoto from "../assets/img/cartItem.png";
 import Menu from "./Menu";
 import "../assets/css/Cart.css";
@@ -64,6 +63,7 @@ const Cart = ({ history }) => {
 								src={cartPhoto}
 								className="cartImg"
 								style={{ objectFit: "contain" }}
+								alt="CartPhoto"
 							/>
 						</div>
 						<br />

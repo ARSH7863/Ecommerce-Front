@@ -30,14 +30,14 @@ const AddProduct = () => {
 		description,
 		price,
 		categories,
-		category,
-		shipping,
+		// category,
+		// shipping,
 		quantity,
 		expectedDeliveryDate,
 		loading,
 		error,
 		createdProduct,
-		redirectToProfile,
+		// redirectToProfile,
 		formData,
 	} = values;
 

@@ -41,7 +41,7 @@ const Shop = () => {
 	const loadFilteredResults = (newFilters) => {
 		// console.log(newFilters);
 		setLoading(true);
-		const limit = 6;
+		setLimit(6);
 		getFilteredProducts(skip, limit, newFilters).then((data) => {
 			if (data.error) {
 				setError(data.error);
@@ -138,31 +138,31 @@ const Shop = () => {
 		}
 	};
 
-	const FilterData = () => (
-		<div className="shadowFilter Filterbox">
-			<h5 className="text-center">Filter By Category</h5>
-			<ul>
-				<Checkbox
-					categories={categories}
-					handleFilters={(filters) => handleFilters(filters, "category")}
-				/>
-			</ul>
-			<h5 className="text-center">Filter by price range</h5>
-			<br />
-			<MultiRangeSlider
-				min={0}
-				max={40}
-				onChange={({ min, max }) => handleRange(max, min)}
-			/>
-			<br />
-			<br />
-			<div className="text-center">
-				<button className="btn btn-outline-info" onClick={changeRange}>
-					Filter <FiFilter size="15" />
-				</button>
-			</div>
-		</div>
-	);
+	// const FilterData = () => (
+	// 	<div className="shadowFilter Filterbox">
+	// 		<h5 className="text-center">Filter By Category</h5>
+	// 		<ul>
+	// 			<Checkbox
+	// 				categories={categories}
+	// 				handleFilters={(filters) => handleFilters(filters, "category")}
+	// 			/>
+	// 		</ul>
+	// 		<h5 className="text-center">Filter by price range</h5>
+	// 		<br />
+	// 		<MultiRangeSlider
+	// 			min={0}
+	// 			max={40}
+	// 			onChange={({ min, max }) => handleRange(max, min)}
+	// 		/>
+	// 		<br />
+	// 		<br />
+	// 		<div className="text-center">
+	// 			<button className="btn btn-outline-info" onClick={changeRange}>
+	// 				Filter <FiFilter size="15" />
+	// 			</button>
+	// 		</div>
+	// 	</div>
+	// );
 
 	return (
 		// <Layout

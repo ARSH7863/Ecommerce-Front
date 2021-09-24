@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link, withRouter, ReactDOM } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 import { Navbar, Nav, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -32,7 +32,12 @@ const Menu = ({ history }) => {
 				fixed="top"
 			>
 				<Navbar.Brand>
-					<img src={logo} height="30px" style={{ marginBottom: "4px" }} />
+					<img
+						src={logo}
+						height="30px"
+						style={{ marginBottom: "4px" }}
+						alt="logo"
+					/>
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">

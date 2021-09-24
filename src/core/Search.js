@@ -142,7 +142,10 @@ const Search = () => {
 								className="btn px-3 py-1 input-group-text bg-light"
 								style={{ borderRadius: "58%" }}
 							>
-								<img src="https://img.icons8.com/color/24/000000/search--v3.png" />
+								<img
+									src="https://img.icons8.com/color/24/000000/search--v3.png"
+									alt="search"
+								/>
 							</button>
 						</span>
 					</div>

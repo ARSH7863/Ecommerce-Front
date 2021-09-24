@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import ShowImage from "./ShowImage";
-import moment from "moment";
-import { addItem, updateItem, removeItem } from "./cartHelpers";
-import { Button } from "react-bootstrap";
-import { Card } from "react-bootstrap";
+// import moment from "moment";
+import { updateItem, removeItem } from "./cartHelpers";
+
 import "../assets/css/CardDetails.css";
 
 const CardDetails = ({
 	product,
-	showViewProductButton = true,
-	showAddToCartButton = true,
+	// showViewProductButton = true,
+	// showAddToCartButton = true,
 	cartUpdate = false,
 	showRemoveProductButton = false,
 	setRun = (f) => f,
@@ -21,24 +20,24 @@ const CardDetails = ({
 	const [count, setCount] = useState(product.count);
 	let history = useHistory();
 
-	const showViewButton = (showViewProductButton) => {
-		return (
-			showViewProductButton && (
-				<Link to={`/product/${product._id}`} className="mr-2">
-					<button className="btn btn-outline-primary mt-2 mb-2 CardDetails-btn-1">
-						View Product
-					</button>
-				</Link>
-			)
-		);
-	};
+	// const showViewButton = (showViewProductButton) => {
+	// 	return (
+	// 		showViewProductButton && (
+	// 			<Link to={`/product/${product._id}`} className="mr-2">
+	// 				<button className="btn btn-outline-primary mt-2 mb-2 CardDetails-btn-1">
+	// 					View Product
+	// 				</button>
+	// 			</Link>
+	// 		)
+	// 	);
+	// };
 	const showProduct = () => {
 		history.push(`/product/${product._id}`);
 	};
-	const addToCart = () => {
-		// console.log('added');
-		addItem(product, setRedirect(true));
-	};
+	// const addToCart = () => {
+	// 	// console.log('added');
+	// 	addItem(product, setRedirect(true));
+	// };
 
 	const shouldRedirect = (redirect) => {
 		if (redirect) {
@@ -46,26 +45,26 @@ const CardDetails = ({
 		}
 	};
 
-	const showAddToCartBtn = (showAddToCartButton) => {
-		return (
-			showAddToCartButton && (
-				<button
-					onClick={addToCart}
-					className="btn btn-outline-warning mt-2 mb-2 card-btn-1"
-				>
-					Add to cart
-				</button>
-			)
-		);
-	};
+	// const showAddToCartBtn = (showAddToCartButton) => {
+	// 	return (
+	// 		showAddToCartButton && (
+	// 			<button
+	// 				onClick={addToCart}
+	// 				className="btn btn-outline-warning mt-2 mb-2 card-btn-1"
+	// 			>
+	// 				Add to cart
+	// 			</button>
+	// 		)
+	// 	);
+	// };
 
-	const showStock = (quantity) => {
-		return quantity > 0 ? (
-			<span className="badge badge-primary badge-pill">In Stock </span>
-		) : (
-			<span className="badge badge-primary badge-pill">Out of Stock </span>
-		);
-	};
+	// const showStock = (quantity) => {
+	// 	return quantity > 0 ? (
+	// 		<span className="badge badge-primary badge-pill">In Stock </span>
+	// 	) : (
+	// 		<span className="badge badge-primary badge-pill">Out of Stock </span>
+	// 	);
+	// };
 
 	const handleChange = (productId) => (event) => {
 		setRun(!run); // run useEffect in parent Cart
@@ -218,10 +217,7 @@ Added on {moment(product.createdAt).fromNow()}
 </Card.Body>
 </Card>; */
 
-export default CardDetails;
-
-{
-	/* <p className="black-9">
+/* <p className="black-9">
   Category: {product.category && product.category.name}
 </p>
 <p className="black-8">
@@ -229,4 +225,5 @@ export default CardDetails;
 </p>
 {showStock(product.quantity)}
 <br /> */
-}
+
+export default CardDetails;

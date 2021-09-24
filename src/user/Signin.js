@@ -69,7 +69,10 @@ const Signin = ({ location }) => {
 								{showError()}
 								{message && (
 									<div className="alert alert-info text-center">
-										<img src="https://img.icons8.com/ios/24/000000/ok--v1.png" />
+										<img
+											src="https://img.icons8.com/ios/24/000000/ok--v1.png"
+											alt="success"
+										/>
 										&nbsp; {message}
 									</div>
 								)}
@@ -135,6 +138,7 @@ const Signin = ({ location }) => {
 			<img
 				src="https://img.icons8.com/office/23/000000/error.png"
 				className="mb-1"
+				alt="error"
 			/>
 			&nbsp;
 			{error}

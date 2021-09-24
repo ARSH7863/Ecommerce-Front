@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-	getProducts,
+	// getProducts,
 	getBraintreeClientToken,
 	processPayment,
 	createOrder,
@@ -61,6 +61,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 						<img
 							src="https://img.icons8.com/fluency/25/000000/checkout.png"
 							style={{ objectFit: "contain" }}
+							alt="checkout"
 						/>
 					</button>
 				</div>
@@ -160,7 +161,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 						<button
 							onClick={buy}
 							className="btn btn-success btn-block"
-							disabled={data.loading == true}
+							disabled={data.loading === true}
 						>
 							Pay
 						</button>

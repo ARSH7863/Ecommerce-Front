@@ -60,7 +60,7 @@ export default function CartItem({ product, handleRefresh }) {
 							<button
 								className="btn btn-default rounded-circle"
 								onClick={() => decreaseNum(product)}
-								disabled={count == 1}
+								disabled={count === 1}
 							>
 								<AiOutlineMinus />
 							</button>
@@ -77,7 +77,7 @@ export default function CartItem({ product, handleRefresh }) {
 							<button
 								className="btn btn-default rounded-circle"
 								onClick={() => increNum(product)}
-								disabled={count == product.quantity}
+								disabled={count === product.quantity}
 							>
 								<AiOutlinePlus />
 							</button>

@@ -14,11 +14,10 @@ const Signup = ({ history }) => {
 		password: "",
 		error: "",
 		loading: false,
-		success: false,
 	});
 	const [isRevealPwd, setIsRevealPwd] = useState(false);
 
-	const { name, email, password, loading, success, error } = values;
+	const { name, email, password, loading, error } = values;
 
 	const handleChange = (name) => (event) => {
 		setValues({ ...values, error: false, [name]: event.target.value });
@@ -34,7 +33,6 @@ const Signup = ({ history }) => {
 					...values,
 					error: data.error,
 					loading: false,
-					success: false,
 				});
 			} else {
 				setValues({
@@ -43,7 +41,6 @@ const Signup = ({ history }) => {
 					email: "",
 					password: "",
 					error: "",
-					success: true,
 				});
 				history.push({
 					pathname: "/signin",
@@ -191,6 +188,7 @@ const Signup = ({ history }) => {
 			<img
 				src="https://img.icons8.com/office/23/000000/error.png"
 				className="mb-1"
+				alt="error"
 			/>
 			&nbsp;
 			{error}

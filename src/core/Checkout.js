@@ -21,6 +21,8 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 		address: "",
 	});
 
+	const [err, setErr] = useState(true);
+
 	const userId = isAuthenticated() && isAuthenticated().user._id;
 	const token = isAuthenticated() && isAuthenticated().token;
 
@@ -41,6 +43,12 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 	}, []);
 
 	const handleAddress = (event) => {
+		console.log(event.target.value.length);
+		if (event.target.value.length <= 20) {
+			setErr(true);
+		} else {
+			setErr(false);
+		}
 		setData({ ...data, address: event.target.value });
 	};
 
@@ -145,6 +153,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 							className="form-control"
 							value={data.address}
 							placeholder="Type your delivery address here..."
+							required
 						/>
 					</div>
 
@@ -161,7 +170,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 						<button
 							onClick={buy}
 							className="btn btn-success btn-block"
-							disabled={data.loading === true}
+							disabled={data.loading === true || err === true}
 						>
 							Pay
 						</button>

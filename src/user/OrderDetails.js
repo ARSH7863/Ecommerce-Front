@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { Link, useHistory } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 import moment from "moment";
+import "../assets/css/OrderDetails.css";
 import {
 	listOrders,
 	getStatusValues,
@@ -12,9 +14,10 @@ import Loader from "../Loader/Loader";
 export default function OrderDetails() {
 	const [orders, setOrders] = useState([]);
 	const [id, setId] = useState("hii");
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [statusValues, setStatusValues] = useState([]);
 	const location = useLocation();
+	const history = useHistory();
 
 	const { user, token } = isAuthenticated();
 
@@ -41,15 +44,9 @@ export default function OrderDetails() {
 		});
 	};
 
-	const showInput = (key, value) => (
-		<div className="input-group mb-2 mr-sm-2">
-			<div className="input-group-prepend">
-				<div className="input-group-text">{key}</div>
-			</div>
-			<input type="text" value={value} className="form-control" readOnly />
-		</div>
-	);
-
+	const showProduct = (product) => {
+		history.push(`/product/${product}`);
+	};
 	const handleStatusChange = (e, orderId) => {
 		updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
 			if (data.error) {
@@ -62,18 +59,39 @@ export default function OrderDetails() {
 
 	const showStatus = (o) => (
 		<div className="form-group">
-			<h3 className="mark mb-4">Status: {o.status}</h3>
-			<select
-				className="form-control"
-				onChange={(e) => handleStatusChange(e, o._id)}
-			>
-				<option>Update Status</option>
-				{statusValues.map((status, index) => (
-					<option key={index} value={status}>
-						{status}
-					</option>
-				))}
-			</select>
+			<h5 className=" mb-4">
+				Status:
+				{o.status == "Not processed" ? (
+					<span className="text-danger"> {o.status}</span>
+				) : null}
+				{o.status == "Processing" ? (
+					<span className="text-info"> {o.status}</span>
+				) : null}
+				{o.status == "Shipped" ? (
+					<span className="text-info"> {o.status}</span>
+				) : null}
+				{o.status == "Delivered" ? (
+					<span className=" text-success"> {o.status}</span>
+				) : null}
+				{o.status == "Cancelled" ? (
+					<span className=" text-danger"> {o.status}</span>
+				) : null}
+			</h5>
+			<div className="row">
+				<div className="col-md-8">
+					<select
+						className="form-control"
+						onChange={(e) => handleStatusChange(e, o._id)}
+					>
+						<option>Update Status</option>
+						{statusValues.map((status, index) => (
+							<option key={index} value={status}>
+								{status}
+							</option>
+						))}
+					</select>
+				</div>
+			</div>
 		</div>
 	);
 
@@ -93,60 +111,109 @@ export default function OrderDetails() {
 				<Loader />
 			) : (
 				<>
-					{orders.map((o, oIndex) => (
-						<>
-							{id === o._id ? (
+					<div class="row justify-content-center rowOrderDetails">
+						<div class="shadowOrderDetails OrderDetailsbox p-3">
+							{orders.map((o, oIndex) => (
 								<>
-									<div
-										className="mt-5 container"
-										key={oIndex}
-										style={{ borderBottom: "5px solid indigo" }}
-									>
-										<h6 className="text-center">
-											<span className="text-secondary">Order ID: {o._id}</span>
-										</h6>
+									{id === o._id ? (
+										<>
+											<div className="mt-3 mb-3 container" key={oIndex}>
+												<h5 className="ml-md-4 text-break">
+													<i className="">Order ID: {o._id}</i>
+												</h5>
+												<hr />
+												<div className="row">
+													<div className="col-md-8 col-12">
+														<div className="ml-md-4">{showStatus(o)}</div>
+														<hr />
+														<div className="ml-md-4 mb-sm-2">
+															<span className="text-secondary">Address:</span>{" "}
+															<br /> {o.address}
+														</div>
+													</div>
+													<div className="col-md-4 col-12">
+														<ul className="list-group mb-2">
+															<h5 className="list-group-item text-center pt-3 pb-3 bg-primary text-white">
+																Order Status
+															</h5>
 
-										<ul className="list-group mb-2">
-											<li className="list-group-item">{showStatus(o)}</li>
-											<li className="list-group-item">
-												Transaction ID: {o.transaction_id}
-											</li>
-											<li className="list-group-item">Amount: ${o.amount}</li>
-											<li className="list-group-item">
-												Ordered by: {o.user.name}
-											</li>
-											<li className="list-group-item">
-												Ordered on: {moment(o.createdAt).fromNow()}
-											</li>
-											<li className="list-group-item">
-												Delivery address: {o.address}
-											</li>
-										</ul>
+															<li className="list-group-item list-group-item-action">
+																<span className="text-secondary">
+																	Transaction ID: &nbsp;
+																</span>
+																{o.transaction_id}
+															</li>
 
-										<h3 className="mt-4 mb-4 font-italic">
-											Total products in the order: {o.products.length}
-										</h3>
+															<li className="list-group-item list-group-item-action">
+																<span className="text-secondary">
+																	Ordered by: &nbsp;
+																</span>
+																{o.user.name}
+															</li>
+															<li className="list-group-item list-group-item-action">
+																<span className="text-secondary">
+																	Ordered on: &nbsp;
+																</span>
+																{moment(o.createdAt).fromNow()}
+															</li>
+															<li className="list-group-item list-group-item-action">
+																<span className="text-secondary">
+																	Total Amount: &nbsp;
+																</span>
+																${o.amount}
+															</li>
+														</ul>
+													</div>
+												</div>
 
-										{o.products.map((p, pIndex) => (
-											<div
-												className="mb-4"
-												key={pIndex}
-												style={{
-													padding: "20px",
-													border: "1px solid indigo",
-												}}
-											>
-												{showInput("Product name", p.name)}
-												{showInput("Product price", p.price)}
-												{showInput("Product total", p.count)}
-												{showInput("Product Id", p._id)}
+												<div className="row">
+													<div className="col-md-8">
+														<hr />
+														<h5 className="mt-4 text-center mb-4 font-italic">
+															Total products in the order: {o.products.length}
+														</h5>
+														<ul className="list-group list-group-flush ml-md-4">
+															{o.products.map((p, pIndex) => (
+																<li className="list-group-item list-group-item-action list-group-item-light">
+																	<div className="" key={pIndex}>
+																		<div className="row">
+																			<div className="col-md-10 col-6">
+																				<Link
+																					className="productLink"
+																					onClick={() => showProduct(p._id)}
+																					style={{ textDecoration: "none" }}
+																				>
+																					<span className="font-weight-normal">
+																						{p.name}
+																					</span>
+																				</Link>
+																			</div>
+																			<div className="col-md-2 col-6 font-weight-normal">
+																				{p.count} x {p.price} =
+																				{p.count * p.price}
+																			</div>
+																		</div>
+																	</div>
+																</li>
+															))}
+														</ul>
+
+														<div className="float-right mr-4">
+															<span className="font-italic mr-4">
+																Total Amount:
+															</span>
+															${o.amount}
+														</div>
+													</div>
+													<div className="col-md-4"></div>
+												</div>
 											</div>
-										))}
-									</div>
+										</>
+									) : null}
 								</>
-							) : null}
-						</>
-					))}
+							))}
+						</div>
+					</div>
 				</>
 			)}
 		</>

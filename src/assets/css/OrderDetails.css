@@ -1,0 +1,24 @@
+.rowOrderDetails {
+	margin: 0.5rem;
+	padding-top: 2rem;
+}
+
+.shadowOrderDetails {
+	box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+		0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+	transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.OrderDetailsbox {
+	border-radius: 0.3rem;
+	width: 90vw;
+	height: auto;
+}
+
+@media screen and (min-width: 480px) {
+	.OrderDetailsbox {
+		border-radius: 0.3rem;
+		width: 70rem;
+		height: auto;
+	}
+}

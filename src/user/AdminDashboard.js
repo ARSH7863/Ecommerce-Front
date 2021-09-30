@@ -61,16 +61,10 @@ const AdminDashboard = () => {
 					</Tabs>
 				</div> */}
 				<div className="container-fluid pt-5">
-					<Tab.Container id="left-tabs-example" defaultActiveKey="AddCategory">
+					<Tab.Container id="left-tabs-example" defaultActiveKey="Orders">
 						<Row>
 							<Col sm={3}>
 								<Nav variant="pills" className="flex-column">
-									<Nav.Item>
-										<Nav.Link eventKey="AddCategory">Add Category</Nav.Link>
-									</Nav.Item>
-									<Nav.Item>
-										<Nav.Link eventKey="AddProduct">Add Product</Nav.Link>
-									</Nav.Item>
 									<Nav.Item>
 										<Nav.Link eventKey="Orders">Orders</Nav.Link>
 									</Nav.Item>
@@ -78,6 +72,12 @@ const AdminDashboard = () => {
 										<Nav.Link eventKey="ManageProducts">
 											Manage Products
 										</Nav.Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Nav.Link eventKey="AddProduct">Add Product</Nav.Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Nav.Link eventKey="AddCategory">Add Category</Nav.Link>
 									</Nav.Item>
 								</Nav>
 							</Col>

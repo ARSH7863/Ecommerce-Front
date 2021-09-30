@@ -118,12 +118,12 @@ export default function OrderDetails() {
 									{id === o._id ? (
 										<>
 											<div className="mt-3 mb-3 container" key={oIndex}>
-												<h5 className="ml-md-4 text-break">
-													<i className="">Order ID: {o._id}</i>
-												</h5>
-												<hr />
 												<div className="row">
 													<div className="col-md-8 col-12">
+														<h5 className="ml-md-4 text-break">
+															<i className="">Order ID: {o._id}</i>
+														</h5>
+														<hr />
 														<div className="ml-md-4">{showStatus(o)}</div>
 														<hr />
 														<div className="ml-md-4 mb-sm-2">
@@ -167,12 +167,13 @@ export default function OrderDetails() {
 												</div>
 
 												<div className="row">
-													<div className="col-md-8">
+													<div className="col-md-1"></div>
+													<div className="col-md-10">
 														<hr />
 														<h5 className="mt-4 text-center mb-4 font-italic">
 															Total products in the order: {o.products.length}
 														</h5>
-														<ul className="list-group list-group-flush ml-md-4">
+														<ul className="list-group  list-unstyled ml-md-4">
 															{o.products.map((p, pIndex) => (
 																<li className="list-group-item list-group-item-action list-group-item-light">
 																	<div className="" key={pIndex}>
@@ -184,7 +185,7 @@ export default function OrderDetails() {
 																					style={{ textDecoration: "none" }}
 																				>
 																					<span className="font-weight-normal">
-																						{p.name}
+																						{pIndex + 1}. {p.name}
 																					</span>
 																				</Link>
 																			</div>
@@ -205,7 +206,7 @@ export default function OrderDetails() {
 															${o.amount}
 														</div>
 													</div>
-													<div className="col-md-4"></div>
+													<div className="col-md-1"></div>
 												</div>
 											</div>
 										</>

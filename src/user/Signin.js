@@ -10,8 +10,8 @@ import hidePwdImg from "../assets/img/Password/hide.png";
 
 const Signin = ({ location }) => {
 	const [values, setValues] = useState({
-		email: "abc@gmail.com",
-		password: "abc7863",
+		email: "abcd@gmail.com",
+		password: "abcd7863",
 		error: "",
 		loading: false,
 		redirectToReferrer: false,

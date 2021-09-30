@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link, withRouter, ReactDOM } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 import { Navbar, Nav, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -8,7 +8,10 @@ import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-
+import colors from "../constants/colors";
+const {
+	user: { _id, name },
+} = isAuthenticated();
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
 		return {
@@ -21,6 +24,7 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => {
+	const firstLetter = name.charAt(0).toUpperCase();
 	return (
 		<div>
 			<Navbar
@@ -118,6 +122,32 @@ const Menu = ({ history }) => {
 						</Form>
 					</Nav>
 					<Nav>
+						{isAuthenticated() && isAuthenticated().user.role === 0 && (
+							<Nav.Link>
+								<Link
+									className="nav-link"
+									style={isActive(history, "/user/dashboard")}
+									to={`/profile/${_id}`}
+								>
+									<OverlayTrigger
+										overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
+										placement="bottom"
+									>
+										<span className="d-inline-block">
+											<button
+												className="btn btn-sm rounded-circle"
+												style={{
+													backgroundColor: colors[firstLetter],
+													color: "white",
+												}}
+											>
+												{firstLetter}
+											</button>
+										</span>
+									</OverlayTrigger>
+								</Link>
+							</Nav.Link>
+						)}
 						{!isAuthenticated() && (
 							<Fragment>
 								<Nav.Link>
@@ -165,7 +195,7 @@ const Menu = ({ history }) => {
 
 						{isAuthenticated() && (
 							<div>
-								<li className="nav-item">
+								<li className="nav-item mt-2">
 									<span
 										className="nav-link"
 										style={{ cursor: "pointer", color: "#ffffff" }}

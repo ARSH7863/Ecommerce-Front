@@ -61,19 +61,19 @@ export default function OrderDetails() {
 		<div className="form-group">
 			<h5 className=" mb-4">
 				Status:
-				{o.status == "Not processed" ? (
+				{o.status === "Not processed" ? (
 					<span className="text-danger"> {o.status}</span>
 				) : null}
-				{o.status == "Processing" ? (
+				{o.status === "Processing" ? (
 					<span className="text-info"> {o.status}</span>
 				) : null}
-				{o.status == "Shipped" ? (
+				{o.status === "Shipped" ? (
 					<span className="text-info"> {o.status}</span>
 				) : null}
-				{o.status == "Delivered" ? (
+				{o.status === "Delivered" ? (
 					<span className=" text-success"> {o.status}</span>
 				) : null}
-				{o.status == "Cancelled" ? (
+				{o.status === "Cancelled" ? (
 					<span className=" text-danger"> {o.status}</span>
 				) : null}
 			</h5>

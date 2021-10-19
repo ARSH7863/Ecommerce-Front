@@ -10,8 +10,9 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import colors from "../constants/colors";
 const {
-	user: { _id, name },
+	user: { _id, name, role },
 } = isAuthenticated();
+// console.log(_id);
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
 		return {

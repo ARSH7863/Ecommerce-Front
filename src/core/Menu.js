@@ -123,32 +123,32 @@ const Menu = ({ history }) => {
 						</Form>
 					</Nav>
 					<Nav>
-						{isAuthenticated() && isAuthenticated().user.role === 0 && (
-							<Nav.Link>
-								<Link
-									className="nav-link"
-									style={isActive(history, "/user/dashboard")}
-									to={`/profile/${_id}`}
+						{/* {isAuthenticated() && isAuthenticated().user.role === 0 && ( */}
+						<Nav.Link>
+							<Link
+								className="nav-link"
+								style={isActive(history, "/user/dashboard")}
+								to={`/profile/${_id}`}
+							>
+								<OverlayTrigger
+									overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
+									placement="bottom"
 								>
-									<OverlayTrigger
-										overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
-										placement="bottom"
-									>
-										<span className="d-inline-block">
-											<button
-												className="btn btn-sm rounded-circle"
-												style={{
-													backgroundColor: colors[firstLetter],
-													color: "white",
-												}}
-											>
-												{firstLetter}
-											</button>
-										</span>
-									</OverlayTrigger>
-								</Link>
-							</Nav.Link>
-						)}
+									<span className="d-inline-block">
+										<button
+											className="btn btn-sm rounded-circle"
+											style={{
+												backgroundColor: colors[firstLetter],
+												color: "white",
+											}}
+										>
+											{firstLetter}
+										</button>
+									</span>
+								</OverlayTrigger>
+							</Link>
+						</Nav.Link>
+						{/* )} */}
 						{!isAuthenticated() && (
 							<Fragment>
 								<Nav.Link>
@@ -193,7 +193,6 @@ const Menu = ({ history }) => {
 								</Nav.Link>
 							</Fragment>
 						)}
-
 						{isAuthenticated() && (
 							<div>
 								<li className="nav-item mt-2">

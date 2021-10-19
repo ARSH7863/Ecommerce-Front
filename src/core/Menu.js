@@ -9,9 +9,8 @@ import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import colors from "../constants/colors";
-// const {
-// 	user: { _id, name },
-// } = isAuthenticated();
+
+// console.log(_id);
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
 		return {
@@ -24,6 +23,11 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => {
+	if (isAuthenticated()) {
+		const {
+			user: { _id, name, role },
+		} = isAuthenticated();
+	}
 	// const firstLetter = name.charAt(0).toUpperCase();
 	return (
 		<div>
@@ -137,11 +141,11 @@ const Menu = ({ history }) => {
 											<button
 												className="btn btn-sm rounded-circle"
 												style={{
-													// backgroundColor: colors[0],
+													backgroundColor: colors["A"],
 													color: "white",
 												}}
 											>
-												a
+												{/* {firstLetter} */}A
 											</button>
 										</span>
 									</OverlayTrigger>
@@ -192,7 +196,6 @@ const Menu = ({ history }) => {
 								</Nav.Link>
 							</Fragment>
 						)}
-
 						{isAuthenticated() && (
 							<div>
 								<li className="nav-item mt-2">

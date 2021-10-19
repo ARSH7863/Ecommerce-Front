@@ -9,9 +9,9 @@ import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import colors from "../constants/colors";
-const {
-	user: { _id, name },
-} = isAuthenticated();
+// const {
+// 	user: { _id, name },
+// } = isAuthenticated();
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
 		return {
@@ -24,7 +24,7 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => {
-	const firstLetter = name.charAt(0).toUpperCase();
+	// const firstLetter = name.charAt(0).toUpperCase();
 	return (
 		<div>
 			<Navbar
@@ -127,7 +127,7 @@ const Menu = ({ history }) => {
 								<Link
 									className="nav-link"
 									style={isActive(history, "/user/dashboard")}
-									to={`/profile/${_id}`}
+									// to={`/profile/${_id}`}
 								>
 									<OverlayTrigger
 										overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
@@ -137,11 +137,11 @@ const Menu = ({ history }) => {
 											<button
 												className="btn btn-sm rounded-circle"
 												style={{
-													backgroundColor: colors[firstLetter],
+													// backgroundColor: colors[0],
 													color: "white",
 												}}
 											>
-												{firstLetter}
+												a
 											</button>
 										</span>
 									</OverlayTrigger>

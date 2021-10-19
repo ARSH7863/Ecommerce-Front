@@ -9,9 +9,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import colors from "../constants/colors";
-const {
-	user: { _id, name, role },
-} = isAuthenticated();
+
 // console.log(_id);
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
@@ -25,7 +23,12 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => {
-	const firstLetter = name.charAt(0).toUpperCase();
+	if (isAuthenticated()) {
+		const {
+			user: { _id, name, role },
+		} = isAuthenticated();
+	}
+	// const firstLetter = name.charAt(0).toUpperCase();
 	return (
 		<div>
 			<Navbar
@@ -123,32 +126,32 @@ const Menu = ({ history }) => {
 						</Form>
 					</Nav>
 					<Nav>
-						{/* {isAuthenticated() && isAuthenticated().user.role === 0 && ( */}
-						<Nav.Link>
-							<Link
-								className="nav-link"
-								style={isActive(history, "/user/dashboard")}
-								to={`/profile/${_id}`}
-							>
-								<OverlayTrigger
-									overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
-									placement="bottom"
+						{isAuthenticated() && isAuthenticated().user.role === 0 && (
+							<Nav.Link>
+								<Link
+									className="nav-link"
+									style={isActive(history, "/user/dashboard")}
+									// to={`/profile/${_id}`}
 								>
-									<span className="d-inline-block">
-										<button
-											className="btn btn-sm rounded-circle"
-											style={{
-												backgroundColor: colors[firstLetter],
-												color: "white",
-											}}
-										>
-											{firstLetter}
-										</button>
-									</span>
-								</OverlayTrigger>
-							</Link>
-						</Nav.Link>
-						{/* )} */}
+									<OverlayTrigger
+										overlay={<Tooltip id="tooltip-disabled">Profile</Tooltip>}
+										placement="bottom"
+									>
+										<span className="d-inline-block">
+											<button
+												className="btn btn-sm rounded-circle"
+												style={{
+													backgroundColor: colors["A"],
+													color: "white",
+												}}
+											>
+												{/* {firstLetter} */}A
+											</button>
+										</span>
+									</OverlayTrigger>
+								</Link>
+							</Nav.Link>
+						)}
 						{!isAuthenticated() && (
 							<Fragment>
 								<Nav.Link>

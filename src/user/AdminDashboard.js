@@ -4,8 +4,8 @@ import { Tab, Row, Col, Nav } from "react-bootstrap";
 import Menu from "../core/Menu";
 import AddCategory from "../admin/AddCategory";
 import AddProduct from "../admin/AddProduct";
-// import Orders from "../admin/Orders";
-// import ManageProducts from "../admin/ManageProducts";
+import Orders from "../admin/Orders";
+import ManageProducts from "../admin/ManageProducts";
 
 const AdminDashboard = () => {
 	const {
@@ -61,18 +61,18 @@ const AdminDashboard = () => {
 					</Tabs>
 				</div> */}
 				<div className="container-fluid pt-5">
-					<Tab.Container id="left-tabs-example" defaultActiveKey="AddProduct">
+					<Tab.Container id="left-tabs-example" defaultActiveKey="Orders">
 						<Row>
 							<Col sm={3}>
 								<Nav variant="pills" className="flex-column">
-									{/* <Nav.Item>
+									<Nav.Item>
 										<Nav.Link eventKey="Orders">Orders</Nav.Link>
 									</Nav.Item>
 									<Nav.Item>
 										<Nav.Link eventKey="ManageProducts">
 											Manage Products
 										</Nav.Link>
-									</Nav.Item> */}
+									</Nav.Item>
 									<Nav.Item>
 										<Nav.Link eventKey="AddProduct">Add Product</Nav.Link>
 									</Nav.Item>
@@ -89,12 +89,12 @@ const AdminDashboard = () => {
 									<Tab.Pane eventKey="AddProduct">
 										<AddProduct />
 									</Tab.Pane>
-									{/* <Tab.Pane eventKey="Orders">
+									<Tab.Pane eventKey="Orders">
 										<Orders />
 									</Tab.Pane>
 									<Tab.Pane eventKey="ManageProducts">
 										<ManageProducts />
-									</Tab.Pane> */}
+									</Tab.Pane>
 								</Tab.Content>
 							</Col>
 						</Row>

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Home from "./core/Home";
-import PrivateRoute from "./auth/PrivateRoute";
+import UserRoute from "./auth/UserRoute";
 import Dashboard from "./user/UserDashboard";
 import AdminDashboard from "./user/AdminDashboard";
 import AddCategory from "./admin/AddCategory";
@@ -30,8 +30,8 @@ const Routes = () => {
 				<Route path="/product/:productId" exact component={Product} />
 				<Route path="/cart" exact component={Cart} />
 				<Route path="/checkout" exact component={PlaceOrder} />
-				<PrivateRoute path="/user/dashboard" exact component={Dashboard} />
-				<PrivateRoute path="/profile/:userId" exact component={Profile} />
+				<UserRoute path="/user/dashboard" exact component={Dashboard} />
+				<UserRoute path="/profile/:userId" exact component={Profile} />
 				<AdminRoute path="/admin/products" exact component={ManageProducts} />
 				<AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
 				<AdminRoute path="/create/category" exact component={AddCategory} />
